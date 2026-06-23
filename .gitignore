@@ -1,0 +1,30 @@
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# next.js
+/.next/
+/out/
+/build
+next-env.d.ts
+
+# misc
+.DS_Store
+*.pem
+.vercel
+.env*.local
+
+# python
+__pycache__/
+*.pyc
+
+# ── data ───────────────────────────────────────────────────────────────
+# Raw inputs — kept locally, not needed at build/runtime (see docs/DATA_PIPELINE.md):
+#   • Personal_Perfume_Collection.xlsx  — source of truth, restore here to re-run `npm run data`
+#   • *.csv                             — large external datasets, re-downloadable
+/data/sources/
+# Regenerable intermediate pipeline artifacts.
+/data/build/
+#
+# COMMITTED (the app reads only this): data/generated/*.json

@@ -1,0 +1,12 @@
+{
+  "name": "The Vault · Fragrance Collection",
+  "short_name": "The Vault",
+  "description": "A personal fragrance collection — notes, families, seasons, occasions and layering.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f4efe6",
+  "theme_color": "#f4efe6",
+  "icons": [
+    { "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}

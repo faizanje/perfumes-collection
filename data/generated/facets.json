@@ -1,0 +1,223 @@
+{
+  "total": 313,
+  "families": [
+    [
+      "Fresh / Citrus",
+      94
+    ],
+    [
+      "Aromatic / Fresh",
+      60
+    ],
+    [
+      "Amber / Oriental",
+      40
+    ],
+    [
+      "Woody",
+      38
+    ],
+    [
+      "Fruity",
+      26
+    ],
+    [
+      "Gourmand / Sweet",
+      23
+    ],
+    [
+      "Floral",
+      14
+    ],
+    [
+      "Oud / Animalic",
+      13
+    ],
+    [
+      "Leather / Smoky",
+      5
+    ]
+  ],
+  "houses": [
+    [
+      "Arome",
+      114
+    ],
+    [
+      "Scent It",
+      97
+    ],
+    [
+      "Enchante",
+      14
+    ],
+    [
+      "Twisty Sense",
+      10
+    ],
+    [
+      "Scentiments",
+      8
+    ],
+    [
+      "Everscent",
+      7
+    ],
+    [
+      "Scent N Stories",
+      7
+    ],
+    [
+      "Perfumes Hub",
+      6
+    ],
+    [
+      "Afnan",
+      6
+    ],
+    [
+      "Sesky",
+      5
+    ],
+    [
+      "Armaf",
+      5
+    ],
+    [
+      "Nioi Sentirbon",
+      4
+    ],
+    [
+      "Unknown",
+      4
+    ],
+    [
+      "Unbranded Local",
+      4
+    ],
+    [
+      "Ahmed Al-Maghrabi",
+      4
+    ],
+    [
+      "Pristine Aromas",
+      2
+    ],
+    [
+      "Dedallad",
+      2
+    ],
+    [
+      "Maison Alhambra",
+      2
+    ],
+    [
+      "Rasasi",
+      2
+    ],
+    [
+      "Lattafa",
+      2
+    ],
+    [
+      "J.",
+      2
+    ],
+    [
+      "Rue Broca",
+      1
+    ],
+    [
+      "Rayhaan",
+      1
+    ],
+    [
+      "Essencia De Flores",
+      1
+    ],
+    [
+      "Seris Perfumes",
+      1
+    ],
+    [
+      "Bonanza Satrangi",
+      1
+    ],
+    [
+      "Fab",
+      1
+    ]
+  ],
+  "groups": [
+    "AROME — COLLECTION 1",
+    "AROME — COLLECTION 2",
+    "SCENT IT — COLLECTION 1",
+    "SCENT IT — COLLECTION 2",
+    "TWISTY SENSE",
+    "SESKY",
+    "NIOI SENTIRBON",
+    "ENCHANTE",
+    "PRISTINE AROMAS",
+    "EVERSCENT",
+    "SCENT N STORIES",
+    "SCENTIMENTS",
+    "PERFUMES HUB",
+    "UNKNOWN BRAND",
+    "DEDALLAD",
+    "UNBRANDED LOCAL",
+    "MIDDLE EASTERN HOUSES",
+    "FAB"
+  ],
+  "seasons": [
+    [
+      "fall",
+      208
+    ],
+    [
+      "summer",
+      190
+    ],
+    [
+      "winter",
+      168
+    ],
+    [
+      "spring",
+      164
+    ]
+  ],
+  "occasions": [
+    [
+      "Daily",
+      241
+    ],
+    [
+      "Office",
+      236
+    ],
+    [
+      "Casual",
+      236
+    ],
+    [
+      "Evening",
+      202
+    ],
+    [
+      "Date night",
+      202
+    ],
+    [
+      "Versatile",
+      135
+    ],
+    [
+      "Night out",
+      129
+    ],
+    [
+      "Special occasion",
+      129
+    ]
+  ]
+}
