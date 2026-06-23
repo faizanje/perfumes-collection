@@ -43,7 +43,7 @@ export function Filters({
                 onClick={() => patch({ families: toggle(filter.families, fam) })}
                 aria-pressed={active}
                 className={`flex items-center justify-between rounded-sm px-2.5 py-1.5 text-sm transition-colors ${
-                  active ? "bg-ink text-paper" : "text-ink-2 hover:bg-paper-3"
+                  active ? "bg-ink text-canvas" : "text-ink-2 hover:bg-surface-2"
                 }`}
               >
                 <span className="flex items-center gap-2">
@@ -68,7 +68,7 @@ export function Filters({
                 onClick={() => patch({ seasons: toggle(filter.seasons, s) })}
                 aria-pressed={active}
                 className={`rounded-full border px-3 py-1.5 text-sm transition-colors ${
-                  active ? "border-ink bg-ink text-paper" : "border-line text-ink-2 hover:border-ink-3"
+                  active ? "border-ink bg-ink text-canvas" : "border-line text-ink-2 hover:border-ink-3"
                 }`}
               >
                 {SEASON_LABEL[s]}
@@ -89,7 +89,7 @@ export function Filters({
                 onClick={() => patch({ occasions: toggle(filter.occasions, o) })}
                 aria-pressed={active}
                 className={`rounded-full border px-3 py-1.5 text-sm transition-colors ${
-                  active ? "border-ink bg-ink text-paper" : "border-line text-ink-2 hover:border-ink-3"
+                  active ? "border-ink bg-ink text-canvas" : "border-line text-ink-2 hover:border-ink-3"
                 }`}
               >
                 {o}
@@ -111,7 +111,7 @@ export function Filters({
                   onClick={() => patch({ houses: toggle(filter.houses, h) })}
                   aria-pressed={active}
                   className={`flex items-center justify-between rounded-sm px-2.5 py-1 text-sm transition-colors ${
-                    active ? "bg-ink text-paper" : "text-ink-2 hover:bg-paper-3"
+                    active ? "bg-ink text-canvas" : "text-ink-2 hover:bg-surface-2"
                   }`}
                 >
                   <span className="truncate">{h}</span>

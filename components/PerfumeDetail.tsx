@@ -40,7 +40,7 @@ function MetaEditor({ perfume }: { perfume: Perfume }) {
   useEffect(() => setDraft(m.note ?? ""), [perfume.id, m.note]);
 
   return (
-    <div className="rounded-md border border-line bg-paper p-4">
+    <div className="rounded-md border border-line bg-canvas p-4">
       <div className="mb-3 flex items-center justify-between">
         <span className="label">Your notes</span>
         <div className="flex items-center gap-1" role="group" aria-label="Your rating">
@@ -64,7 +64,7 @@ function MetaEditor({ perfume }: { perfume: Perfume }) {
         onBlur={() => setNote(perfume.id, draft.trim())}
         rows={2}
         placeholder="How does it wear? When did you reach for it?"
-        className="w-full resize-none rounded-sm border border-line bg-paper-2 px-3 py-2 text-sm text-ink placeholder:text-ink-3 focus:border-ink-3 focus:outline-none"
+        className="w-full resize-none rounded-sm border border-line bg-surface px-3 py-2 text-sm text-ink placeholder:text-ink-3 focus:border-ink-3 focus:outline-none"
       />
     </div>
   );
@@ -102,14 +102,15 @@ export function PerfumeDetail({
       <button
         aria-label="Close"
         onClick={onClose}
-        className="absolute inset-0 bg-[oklch(20%_0.02_60_/_0.42)] backdrop-blur-[2px] animate-[fade_var(--dur-mid)_ease-out]"
+        style={{ background: "var(--scrim)" }}
+        className="absolute inset-0 backdrop-blur-[2px] animate-[fade_var(--dur-mid)_ease-out]"
       />
       <div
         data-family={profile.family}
-        className="absolute inset-y-0 right-0 flex w-full max-w-[33rem] flex-col overflow-y-auto border-l border-line bg-paper shadow-2xl animate-[slidein_var(--dur-mid)_var(--ease-out)] sm:rounded-l-lg"
+        className="absolute inset-y-0 right-0 flex w-full max-w-[33rem] flex-col overflow-y-auto border-l border-line bg-canvas shadow-2xl animate-[slidein_var(--dur-mid)_var(--ease-out)] sm:rounded-l-lg"
       >
         {/* header */}
-        <div className="sticky top-0 z-10 border-b border-line bg-paper/95 px-6 py-3 backdrop-blur">
+        <div className="sticky top-0 z-10 border-b border-line bg-canvas/95 px-6 py-3 backdrop-blur">
           <div className="flex items-center justify-between">
             <span className="inline-flex items-center gap-2">
               <span className="h-2.5 w-2.5 rounded-full" style={{ background: "var(--fam)" }} />
@@ -167,7 +168,7 @@ export function PerfumeDetail({
                   <span
                     key={a}
                     className="rounded-full px-2.5 py-1 text-xs capitalize text-ink-2"
-                    style={{ background: "color-mix(in oklab, var(--fam) 14%, var(--color-paper-2))" }}
+                    style={{ background: "color-mix(in oklab, var(--fam) 14%, var(--color-surface))" }}
                   >
                     {a}
                   </span>
@@ -232,7 +233,7 @@ export function PerfumeDetail({
                     <button
                       onClick={() => onOpen(p)}
                       data-family={p.profile.family}
-                      className="flex w-full items-center gap-3 rounded-sm border border-line bg-paper-2 px-3 py-2 text-left transition-colors hover:border-ink-3"
+                      className="flex w-full items-center gap-3 rounded-sm border border-line bg-surface px-3 py-2 text-left transition-colors hover:border-ink-3"
                     >
                       <span className="h-2 w-2 shrink-0 rounded-full" style={{ background: "var(--fam)" }} />
                       <span className="min-w-0 flex-1">

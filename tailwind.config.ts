@@ -1,6 +1,7 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
+  darkMode: ["class", '[data-theme="dark"]'],
   content: [
     "./app/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
@@ -9,14 +10,15 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        paper: "var(--color-paper)",
-        "paper-2": "var(--color-paper-2)",
-        "paper-3": "var(--color-paper-3)",
+        canvas: "var(--color-canvas)",
+        surface: "var(--color-surface)",
+        "surface-2": "var(--color-surface-2)",
         ink: "var(--color-ink)",
         "ink-2": "var(--color-ink-2)",
         "ink-3": "var(--color-ink-3)",
         line: "var(--color-line)",
         accent: "var(--color-accent)",
+        "accent-ink": "var(--color-accent-ink)",
       },
       fontFamily: {
         display: "var(--font-display)",
@@ -28,6 +30,7 @@ const config: Config = {
         sm: "var(--radius-sm)",
         md: "var(--radius-md)",
         lg: "var(--radius-lg)",
+        xl: "var(--radius-xl)",
       },
       transitionTimingFunction: {
         out: "var(--ease-out)",
@@ -35,7 +38,7 @@ const config: Config = {
         "in-out": "var(--ease-in-out)",
       },
       maxWidth: {
-        shell: "78rem",
+        shell: "82rem",
       },
     },
   },

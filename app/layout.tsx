@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   description:
     "A curated, searchable archive of 313 fragrances — notes, families, seasons, occasions and layering, all in one place.",
   manifest: "/manifest.webmanifest",
-  appleWebApp: { capable: true, statusBarStyle: "default", title: "The Vault" },
+  appleWebApp: { capable: true, statusBarStyle: "black-translucent", title: "The Vault" },
   openGraph: {
     title: "The Vault · A Personal Fragrance Collection",
     description: "313 fragrances, enriched with notes, season, occasion and layering.",
@@ -37,14 +37,28 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#f4efe6",
+  themeColor: [
+    { media: "(prefers-color-scheme: dark)", color: "#1a160f" },
+    { media: "(prefers-color-scheme: light)", color: "#f6f2e9" },
+  ],
   width: "device-width",
   initialScale: 1,
 };
 
+// Applied before paint to avoid a theme flash. Default: dark.
+const themeScript = `(function(){try{var t=localStorage.getItem('pc.theme');if(!t){t='dark';}document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','dark');}})();`;
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${fraunces.variable} ${inter.variable} ${plex.variable}`}>
+    <html
+      lang="en"
+      data-theme="dark"
+      suppressHydrationWarning
+      className={`${fraunces.variable} ${inter.variable} ${plex.variable}`}
+    >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body>
         <UserMetaProvider>{children}</UserMetaProvider>
       </body>

@@ -25,7 +25,7 @@ export function WearClient({
 
   return (
     <>
-      <div className="rounded-md border border-line bg-paper-2 p-5 sm:p-7">
+      <div className="rounded-md border border-line bg-surface p-5 sm:p-7">
         <Row label="Season">
           <ChipRow>
             {SEASONS.map((s) => (
@@ -122,7 +122,7 @@ function Toggle({
       onClick={onClick}
       aria-pressed={active}
       className={`rounded-full border px-3.5 py-1.5 text-sm transition-colors duration-[var(--dur-fast)] ease-out ${
-        active ? "border-ink bg-ink text-paper" : "border-line text-ink-2 hover:border-ink-3 hover:text-ink"
+        active ? "border-ink bg-ink text-canvas" : "border-line text-ink-2 hover:border-ink-3 hover:text-ink"
       }`}
     >
       {children}

@@ -61,8 +61,8 @@ export function Chip({
 }) {
   const cls = `inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-sm transition-colors duration-[var(--dur-fast)] ease-out ${
     active
-      ? "border-ink bg-ink text-paper"
-      : "border-line bg-paper-2 text-ink-2 hover:border-ink-3 hover:text-ink"
+      ? "border-ink bg-ink text-canvas"
+      : "border-line bg-surface text-ink-2 hover:border-ink-3 hover:text-ink"
   }`;
   if (as === "span") {
     return (
@@ -92,6 +92,6 @@ export function ConfidenceMark({ profile }: { profile: Profile }) {
 /** A soft family-tinted wash used at the head of cards and detail. */
 export function familyWash(strength = 14): React.CSSProperties {
   return {
-    background: `linear-gradient(135deg, color-mix(in oklab, var(--fam) ${strength}%, var(--color-paper)) 0%, var(--color-paper) 70%)`,
+    background: `linear-gradient(135deg, color-mix(in oklab, var(--fam) ${strength}%, var(--color-canvas)) 0%, var(--color-canvas) 70%)`,
   };
 }

@@ -28,7 +28,7 @@ export default function HomePage() {
             <div className="mt-7 flex flex-wrap items-center gap-3">
               <Link
                 href="/wear"
-                className="rounded-full bg-ink px-5 py-2.5 text-sm text-paper transition-transform duration-[var(--dur-fast)] ease-out hover:-translate-y-0.5"
+                className="rounded-full bg-ink px-5 py-2.5 text-sm text-canvas transition-transform duration-[var(--dur-fast)] ease-out hover:-translate-y-0.5"
               >
                 What should I wear today? →
               </Link>
