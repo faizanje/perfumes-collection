@@ -2,6 +2,15 @@ import type { Metadata, Viewport } from "next";
 import { Fraunces, Inter, IBM_Plex_Mono } from "next/font/google";
 import { UserMetaProvider } from "@/lib/userMeta";
 import { BottlePrefProvider } from "@/lib/bottlePref";
+import {
+  previewImage,
+  siteAuthor,
+  siteDescription,
+  siteKeywords,
+  siteName,
+  siteTitle,
+  siteUrl,
+} from "@/lib/seo";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -25,9 +34,21 @@ const plex = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Shelf · A Personal Fragrance Collection",
-  description:
-    "A searchable archive of 313 fragrances, with notes, families, seasons, occasions and layering.",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: siteTitle,
+    template: "%s · Shelf",
+  },
+  description: siteDescription,
+  applicationName: siteName,
+  referrer: "origin-when-cross-origin",
+  keywords: siteKeywords,
+  authors: [siteAuthor],
+  creator: siteAuthor.name,
+  publisher: siteAuthor.name,
+  alternates: {
+    canonical: "/",
+  },
   manifest: "/manifest.webmanifest",
   icons: {
     icon: [
@@ -36,11 +57,33 @@ export const metadata: Metadata = {
     ],
     apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
   },
-  appleWebApp: { capable: true, statusBarStyle: "black-translucent", title: "Shelf" },
+  appleWebApp: { capable: true, statusBarStyle: "black-translucent", title: siteName },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+  category: "lifestyle",
   openGraph: {
-    title: "Shelf · A Personal Fragrance Collection",
-    description: "313 fragrances, enriched with notes, season, occasion and layering.",
+    title: siteTitle,
+    description: siteDescription,
+    url: "/",
+    siteName,
+    locale: "en_US",
     type: "website",
+    images: [previewImage],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteTitle,
+    description: siteDescription,
+    images: [previewImage.url],
   },
 };
 
@@ -55,6 +98,19 @@ export const viewport: Viewport = {
 
 // Applied before paint to avoid a theme flash. Default: dark.
 const themeScript = `(function(){try{var t=localStorage.getItem('pc.theme');if(!t){t='dark';}document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','dark');}})();`;
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Shelf",
+  url: `${siteUrl}/`,
+  description: siteDescription,
+  inLanguage: "en",
+  author: {
+    "@type": "Person",
+    name: siteAuthor.name,
+    url: siteAuthor.url,
+  },
+};
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -66,6 +122,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+        />
       </head>
       <body>
         <UserMetaProvider>

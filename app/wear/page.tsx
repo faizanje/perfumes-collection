@@ -1,11 +1,30 @@
 import type { Metadata } from "next";
 import { getCollection, getFacets } from "@/lib/data";
+import { previewImage, siteName } from "@/lib/seo";
 import { WearClient } from "@/components/WearClient";
 import { SiteFooter, SiteHeader } from "@/components/SiteHeader";
 
 export const metadata: Metadata = {
-  title: "What should I wear? · Shelf",
+  title: "What should I wear?",
   description: "Pick a season, occasion and time to get matching fragrances from the collection.",
+  alternates: {
+    canonical: "/wear",
+  },
+  openGraph: {
+    title: "What should I wear? · Shelf",
+    description: "Pick a season, occasion and time to get matching fragrances from the collection.",
+    url: "/wear",
+    siteName,
+    locale: "en_US",
+    type: "website",
+    images: [previewImage],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "What should I wear? · Shelf",
+    description: "Pick a season, occasion and time to get matching fragrances from the collection.",
+    images: [previewImage.url],
+  },
 };
 
 export default function WearPage() {
