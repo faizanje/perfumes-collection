@@ -25,7 +25,7 @@ const plex = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "The Vault · A Personal Fragrance Collection",
+  title: "Shelf · A Personal Fragrance Collection",
   description:
     "A searchable archive of 313 fragrances, with notes, families, seasons, occasions and layering.",
   manifest: "/manifest.webmanifest",
@@ -36,9 +36,9 @@ export const metadata: Metadata = {
     ],
     apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
   },
-  appleWebApp: { capable: true, statusBarStyle: "black-translucent", title: "The Vault" },
+  appleWebApp: { capable: true, statusBarStyle: "black-translucent", title: "Shelf" },
   openGraph: {
-    title: "The Vault · A Personal Fragrance Collection",
+    title: "Shelf · A Personal Fragrance Collection",
     description: "313 fragrances, enriched with notes, season, occasion and layering.",
     type: "website",
   },

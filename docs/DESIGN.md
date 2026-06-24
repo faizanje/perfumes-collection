@@ -1,6 +1,6 @@
 # Design
 
-Dark-default, dual-theme, **bold & colorful** "fragrance vault." The nine fragrance-family colors
+Dark-default, dual-theme, **bold & colorful** "fragrance shelf." The nine fragrance-family colors
 are the primary visual system. This is the *keeper* direction (see
 [USER_PREFERENCES.md](USER_PREFERENCES.md) for the rejected ones — don't go back to pale/restrained).
 

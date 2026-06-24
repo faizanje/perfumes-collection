@@ -1,4 +1,4 @@
-# CLAUDE.md — Master Context for "The Vault"
+# CLAUDE.md — Master Context for "Shelf"
 
 > Read this first in any new chat. It's the single source of truth for what this
 > project is, what the user wants, how the code/data/scraping/images work, and how to
@@ -8,7 +8,7 @@
 
 ## 1. What this is
 
-**The Vault** — a premium personal web app for browsing a fragrance collection of
+**Shelf** — a premium personal web app for browsing a fragrance collection of
 **313 perfumes** across ~27 decant "houses" (Arome, Scent It, Enchanté, etc.). Almost every
 entry is a **clone / "impression"** of a real designer or niche original (e.g. *Check Mate →
 Creed Aventus*). The app shows each perfume's real fragrance data — accords, note pyramid,

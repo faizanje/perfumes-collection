@@ -4,7 +4,7 @@ import { WearClient } from "@/components/WearClient";
 import { SiteFooter, SiteHeader } from "@/components/SiteHeader";
 
 export const metadata: Metadata = {
-  title: "What should I wear? · The Vault",
+  title: "What should I wear? · Shelf",
   description: "Pick a season, occasion and time to get matching fragrances from the collection.",
 };
 

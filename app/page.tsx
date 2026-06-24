@@ -18,7 +18,7 @@ export default function HomePage() {
           <div>
             <p className="label mb-4">A personal fragrance collection</p>
             <h1 className="text-display leading-[0.95] text-ink">
-              The&nbsp;Vault
+              Shelf
             </h1>
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-ink-2">
               Every bottle in the collection: its notes, its family, the seasons and

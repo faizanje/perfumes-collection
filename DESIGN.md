@@ -2,7 +2,7 @@
 
 ## Theme
 
-Dark-default, dual-theme "fragrance vault." A deep warm-charcoal canvas makes the nine
+Dark-default, dual-theme "fragrance shelf." A deep warm-charcoal canvas makes the nine
 fragrance-family colors glow like bottles in a cabinet; a refined light theme mirrors it.
 Bold & immersive: family color drives cards, group headers, and accents. Color strategy:
 **Committed** (family hue carries 20–40% of each card surface), anchored on a neutral ink

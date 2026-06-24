@@ -21,7 +21,7 @@ without help.
 ## Brand Personality
 
 Premium, tactile, collector's-cabinet. Three words: **rich, legible, confident.** It should
-feel like flipping through a beautifully organized fragrance vault — colorful and alive, never
+feel like browsing a beautifully organized fragrance shelf — colorful and alive, never
 clinical, never a boring spreadsheet.
 
 ## Anti-references

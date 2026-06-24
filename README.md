@@ -1,4 +1,4 @@
-# The Vault — Personal Fragrance Collection
+# Shelf — Personal Fragrance Collection
 
 A mobile-first web app for browsing a personal fragrance collection of **313 perfumes**
 across 27 houses. Each fragrance is enriched with its note pyramid, olfactive family,
@@ -38,6 +38,21 @@ Favorites, personal notes and ratings are stored per-device in the browser (loca
 so only the editor's device keeps them. The data layer is abstracted (`lib/data.ts`,
 `lib/userMeta.tsx`) — moving to Supabase for shared editing later means swapping those two
 files, not rewriting the UI.
+
+### Custom domain
+
+Use `shelf.faizanmalik.com` for the branded Vercel domain.
+
+1. In Vercel, open the project → Settings → Domains, then add
+   `shelf.faizanmalik.com`.
+2. In Hostinger DNS for `faizanmalik.com`, add the CNAME Vercel shows you:
+
+| Type | Name | Value |
+| --- | --- | --- |
+| CNAME | `shelf` | Vercel's displayed target, usually `cname.vercel-dns.com` or a project-specific `*.vercel-dns-*.com` value |
+
+Delete any existing `shelf` DNS record first if Hostinger already has one. Once Vercel shows
+valid configuration, SSL will be issued automatically.
 
 ---
 
