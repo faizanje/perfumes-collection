@@ -30,5 +30,29 @@
   "Scent N Stories": {
     "dark": "/img/houses/scent-n-stories.png",
     "light": "/img/houses/scent-n-stories-light.png"
+  },
+  "Afnan": {
+    "dark": "/img/houses/afnan.png",
+    "light": "/img/houses/afnan-light.png"
+  },
+  "Armaf": {
+    "dark": "/img/houses/armaf.png",
+    "light": "/img/houses/armaf-light.png"
+  },
+  "Rasasi": {
+    "dark": "/img/houses/rasasi.png",
+    "light": "/img/houses/rasasi-light.png"
+  },
+  "Lattafa": {
+    "dark": "/img/houses/lattafa.png",
+    "light": "/img/houses/lattafa-light.png"
+  },
+  "Ahmed Al-Maghrabi": {
+    "dark": "/img/houses/ahmed-al-maghrabi.png",
+    "light": "/img/houses/ahmed-al-maghrabi-light.png"
+  },
+  "Maison Alhambra": {
+    "dark": "/img/houses/maison-alhambra.png",
+    "light": "/img/houses/maison-alhambra-light.png"
   }
 }

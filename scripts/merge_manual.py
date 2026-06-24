@@ -82,6 +82,8 @@ URL_OVERRIDES = {
     "roja-elysium-pour-homme": "https://www.fragrantica.com/perfume/Roja-Dove/Elysium-Pour-Homme-Parfum-Cologne-46296.html",
     "blue": "https://www.fragrantica.com/perfume/Ahmed-Al-Maghribi/Blue-by-Ahmed-104882.html",
     "ocean-rush": "https://www.fragrantica.com/perfume/Rayhaan/Ocean-Rush-107857.html",
+    "hooked-pour-homme": "https://www.fragrantica.com/perfume/Rue-Broca/Hooked-Pour-Homme-101121.html",
+    "euphoric-oud": "https://www.fragrantica.com/perfume/Fragrance-World/Euphoric-Oud-123471.html",
 }
 
 

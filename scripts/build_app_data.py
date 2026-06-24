@@ -39,6 +39,19 @@ def local_image(orig):
         return f"https://fimgs.net/mdimg/perfume-thumbs/dark-375x500.{m.group(1)}.webp"
     return orig.get("imageUrl")
 
+# Houses that get promoted from "MIDDLE EASTERN HOUSES" to their own first-class group
+HOUSE_GROUP_OVERRIDE = {
+    "Afnan": "Afnan",
+    "Armaf": "Armaf",
+    "Ahmed Al-Maghrabi": "Ahmed Al-Maghrabi",
+    "Maison Alhambra": "Maison Alhambra",
+    "Rasasi": "Rasasi",
+    "Lattafa": "Lattafa",
+    # Pakistani local brands — not Middle Eastern
+    "J.": "UNBRANDED LOCAL",
+    "Bonanza Satrangi": "UNBRANDED LOCAL",
+}
+
 OWN_HINTS = {
     "green": (["aromatic", "green", "woody", "fresh"], "Aromatic / Fresh",
               ["Galbanum", "Basil"], ["Violet Leaf", "Geranium"], ["Vetiver", "Moss"]),
@@ -153,7 +166,7 @@ def main():
 
         collection.append({
             "id": r["id"], "cloneName": r["cloneName"], "house": r["house"],
-            "group": r["group"], "kind": kind, "isOriginal": r["isOriginal"],
+            "group": HOUSE_GROUP_OVERRIDE.get(r["house"], r["group"]), "kind": kind, "isOriginal": r["isOriginal"],
             "impressionOf": r.get("originalName") or (
                 " + ".join(r.get("blendNames", [])) if kind == "hybrid" else None),
             "impressionRaw": r.get("impressionRaw"),

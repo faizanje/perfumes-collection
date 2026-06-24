@@ -12,7 +12,13 @@ const LOGOS = data as Record<string, HouseLogo>;
 
 // Houses whose logo is a mark/monogram rather than a wordmark spelling the name.
 // For these we still show the logo but KEEP the text label beside it.
-const NON_WORDMARK = new Set<string>(["Pristine Aromas"]);
+const NON_WORDMARK = new Set<string>([
+  "Pristine Aromas",
+  "Armaf",             // circular seal — name is inside but not legible at small sizes
+  "Lattafa",           // calligraphic mark + small text
+  "Ahmed Al-Maghrabi", // Arabic calligraphy mark
+  "Maison Alhambra",   // pictorial stag crest + text
+]);
 
 export function houseLogo(name: string | undefined | null): HouseLogo | null {
   return name ? LOGOS[name] ?? null : null;

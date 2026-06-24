@@ -13,8 +13,10 @@ Outputs public/img/houses/<slug>[-light].png + data/generated/house_logos.json
 """
 import io
 import json
+import os
 import re
 import subprocess
+import tempfile
 from pathlib import Path
 
 from PIL import Image
@@ -53,6 +55,28 @@ HOUSE_LOGOS = {
     "Scent N Stories": {  # white script wordmark + gold quill
         "dark": "https://scentsnstories.pk/cdn/shop/files/SNS_Logo_For_Web_NEW.webp?v=1765471214&width=800",
     },
+    # ── Middle Eastern houses (each promoted to their own group) ──────────
+    "Afnan": {  # white wordmark
+        "dark": "https://afnan.com/cdn/shop/files/white_afnan_logo.png?v=1727709400&width=2000",
+    },
+    "Armaf": {  # black wordmark on transparent
+        "light": "https://armaf.com/cdn/shop/files/Armaf_Black_Logo-removebg-preview_1.png?v=1765219631&width=500",
+    },
+    "Rasasi": {  # colored (blue) wordmark — use as-is for both themes, no inversion
+        "dark": "https://rasasi.com/img/logo.png",
+        "light": "https://rasasi.com/img/logo.png",
+    },
+    "Lattafa": {  # colored (gold + blue) mark — use as-is for both themes
+        "dark": "https://lattafapakistan.com/cdn/shop/files/lattaffa-logo.avif?v=1751564644&width=1500",
+        "light": "https://lattafapakistan.com/cdn/shop/files/lattaffa-logo.avif?v=1751564644&width=1500",
+    },
+    "Ahmed Al-Maghrabi": {  # colored (blue) mark — use as-is for both themes
+        "dark": "https://ae.ahmedalmaghribi.com/assets/images/logo/Desktop.svg",
+        "light": "https://ae.ahmedalmaghribi.com/assets/images/logo/Desktop.svg",
+    },
+    "Maison Alhambra": {  # black stag crest on white — white_to_alpha turns white transparent
+        "light": "https://maisonalhambraperfume.com/wp-content/uploads/2025/01/cropped-473676545_609461084876488_11402663045625254_n.jpg",
+    },
 }
 
 
@@ -81,11 +105,38 @@ def white_to_alpha(im):
     return Image.fromarray(a, "RGBA")
 
 
+def _magick_to_png(raw, ext):
+    """Rasterize SVG or AVIF to PNG bytes via ImageMagick 7."""
+    with tempfile.NamedTemporaryFile(suffix=ext, delete=False) as f:
+        f.write(raw)
+        tmp = f.name
+    try:
+        r = subprocess.run(
+            ["magick", tmp, "-background", "none", "png:-"],
+            capture_output=True,
+        )
+        return r.stdout if r.returncode == 0 and len(r.stdout) > 100 else None
+    finally:
+        os.unlink(tmp)
+
+
 def load(url):
     raw = fetch(url)
     if not raw:
         return None
-    im = Image.open(io.BytesIO(raw)).convert("RGBA")
+    # SVG: PIL can't parse; rasterise with ImageMagick
+    is_svg = raw.lstrip()[:4] in (b"<svg", b"<?xm") or b"<svg" in raw[:500]
+    # AVIF: Pillow doesn't support AVIF on this system
+    is_avif = not is_svg and len(raw) > 12 and raw[4:8] == b"ftyp"
+    if is_svg or is_avif:
+        raw = _magick_to_png(raw, ".svg" if is_svg else ".avif")
+        if not raw:
+            return None
+    try:
+        im = Image.open(io.BytesIO(raw)).convert("RGBA")
+    except Exception as e:
+        print(f"  PIL open failed: {e}")
+        return None
     import numpy as np
     if (np.array(im)[:, :, 3] > 250).mean() > 0.95:  # no real transparency (JPG)
         im = white_to_alpha(im)
