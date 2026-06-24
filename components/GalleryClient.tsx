@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
-import { Search, Heart, SlidersHorizontal, ChevronsDownUp, ChevronsUpDown } from "lucide-react";
+import { Search, Heart, SlidersHorizontal, ChevronsDownUp, ChevronsUpDown, X } from "lucide-react";
 import type { Facets, Perfume } from "@/lib/types";
 import { EMPTY_FILTER, applyFilters, type FilterState } from "@/lib/filter";
 import { GROUP_BY_LABELS, groupPerfumes, type GroupBy } from "@/lib/group";
@@ -68,9 +68,19 @@ export function GalleryClient({
               value={filter.query}
               onChange={(e) => setFilter({ ...filter, query: e.target.value })}
               placeholder="Search name, original, note…"
-              className="w-full rounded-full border border-line bg-surface py-2 pl-9 pr-3 text-sm text-ink placeholder:text-ink-3 focus:border-ink-3 focus:outline-none"
+              className="w-full rounded-full border border-line bg-surface py-2 pl-9 pr-9 text-sm text-ink placeholder:text-ink-3 focus:border-ink-3 focus:outline-none"
               aria-label="Search the collection"
             />
+            {filter.query && (
+              <button
+                type="button"
+                onClick={() => setFilter({ ...filter, query: "" })}
+                aria-label="Clear search"
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 rounded-full p-1 text-ink-3 transition-colors hover:bg-line hover:text-ink focus:outline-none focus-visible:ring-1 focus-visible:ring-ink-3"
+              >
+                <X size={15} strokeWidth={2} aria-hidden />
+              </button>
+            )}
           </div>
 
           {/* view toggle */}

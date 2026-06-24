@@ -18,6 +18,7 @@ const NON_WORDMARK = new Set<string>([
   "Lattafa",           // calligraphic mark + small text
   "Ahmed Al-Maghrabi", // Arabic calligraphy mark
   "Maison Alhambra",   // pictorial stag crest + text
+  "J.",                // single-letter mark — show "J." text label beside it
 ]);
 
 export function houseLogo(name: string | undefined | null): HouseLogo | null {

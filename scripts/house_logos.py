@@ -77,6 +77,9 @@ HOUSE_LOGOS = {
     "Maison Alhambra": {  # black stag crest on white — white_to_alpha turns white transparent
         "light": "https://maisonalhambraperfume.com/wp-content/uploads/2025/01/cropped-473676545_609461084876488_11402663045625254_n.jpg",
     },
+    "J.": {  # dark mark SVG — auto-inverts for dark theme
+        "light": "https://www.junaidjamshed.com/cdn/shop/files/logo_black_-_wania_saleem_453f84ad-f61b-4978-ab3d-785cf12ce04c.svg?v=1768559418",
+    },
 }
 
 

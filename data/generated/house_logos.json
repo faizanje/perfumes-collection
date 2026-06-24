@@ -54,5 +54,9 @@
   "Maison Alhambra": {
     "dark": "/img/houses/maison-alhambra.png",
     "light": "/img/houses/maison-alhambra-light.png"
+  },
+  "J.": {
+    "dark": "/img/houses/j.png",
+    "light": "/img/houses/j-light.png"
   }
 }

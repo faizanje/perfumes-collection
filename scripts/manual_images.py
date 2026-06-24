@@ -20,6 +20,7 @@ OUTDIR.mkdir(parents=True, exist_ok=True)
 # slug -> source image URL (from the clone house's site)
 MANUAL_IMAGES = {
     "addicted": "https://www.junaidjamshed.com/cdn/shop/files/addicted_1_4e7c7020-0508-4f0f-a765-71936c5ba9de.jpg?v=1776961785&width=880",
+    "mani": "https://admin.ahmedalmaghribi.com/public/storage/epdnew/maani-edp-1.jpg",
 }
 
 

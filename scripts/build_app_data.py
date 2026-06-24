@@ -48,7 +48,7 @@ HOUSE_GROUP_OVERRIDE = {
     "Rasasi": "Rasasi",
     "Lattafa": "Lattafa",
     # Pakistani local brands — not Middle Eastern
-    "J.": "UNBRANDED LOCAL",
+    "J.": "Junaid Jamshed",
     "Bonanza Satrangi": "UNBRANDED LOCAL",
 }
 
