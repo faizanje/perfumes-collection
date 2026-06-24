@@ -134,6 +134,25 @@ function Section({ title, children, action }: { title: string; children: React.R
   );
 }
 
+function layeringRoleCopy(role: "anchor" | "topper" | "bridge") {
+  if (role === "anchor") {
+    return {
+      label: "Adds depth",
+      detail: "Use as the warmer base when you want this scent richer.",
+    };
+  }
+  if (role === "topper") {
+    return {
+      label: "Freshens it",
+      detail: "Use as the brighter top layer when you want more lift.",
+    };
+  }
+  return {
+    label: "Easy blend",
+    detail: "Shared notes make this flexible; either order works.",
+  };
+}
+
 export function PerfumeDetail({
   perfume,
   all,
@@ -257,23 +276,43 @@ export function PerfumeDetail({
 
           {partners.length > 0 && (
             <Section title="Layers well with">
-              <ul className="space-y-1.5">
-                {partners.map(({ perfume: p, reason }) => (
-                  <li key={p.id}>
-                    <button
-                      onClick={() => onOpen(p)}
-                      data-family={p.profile.family}
-                      className="flex w-full items-center gap-3 rounded-lg border border-line bg-surface px-3 py-2 text-left transition-colors hover:border-ink-3"
-                    >
-                      <span className="h-2 w-2 shrink-0 rounded-full" style={{ background: "var(--fam)" }} />
-                      <span className="min-w-0 flex-1">
-                        <span className="block truncate text-sm text-ink">{p.cloneName}</span>
-                        <span className="block truncate text-xs text-ink-3">{reason}</span>
-                      </span>
-                      <span className="label shrink-0">{p.house}</span>
-                    </button>
-                  </li>
-                ))}
+              <div className="mb-3 rounded-lg border border-line bg-surface px-3 py-2.5 text-sm text-ink-2">
+                <p>
+                  Spray the first scent in the plan, wait 30-60 seconds, then add the second.
+                  Keep stronger, darker scents to fewer sprays; use fresher scents as the final lift.
+                </p>
+              </div>
+              <ul className="space-y-2">
+                {partners.map(({ perfume: p, reason, role, order, ratio, warnings }) => {
+                  const roleCopy = layeringRoleCopy(role);
+                  return (
+                    <li key={p.id}>
+                      <button
+                        onClick={() => onOpen(p)}
+                        data-family={p.profile.family}
+                        className="flex w-full items-start gap-3 rounded-lg border border-line bg-surface px-3 py-2.5 text-left transition-colors hover:border-ink-3"
+                      >
+                        <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full" style={{ background: "var(--fam)" }} />
+                        <span className="min-w-0 flex-1">
+                          <span className="flex min-w-0 items-center gap-2">
+                            <span className="truncate text-sm text-ink">{p.cloneName}</span>
+                            <span className="shrink-0 rounded-full border border-line px-1.5 py-0.5 text-[0.62rem] uppercase tracking-[0.1em] text-ink-3">
+                              {roleCopy.label}
+                            </span>
+                          </span>
+                          <span className="mt-0.5 block text-xs text-ink-3">{reason}</span>
+                          <span className="mt-1 block text-[0.72rem] leading-snug text-ink-2">{roleCopy.detail}</span>
+                          <span className="mt-1 flex flex-wrap gap-x-3 gap-y-1 text-[0.72rem] text-ink-2">
+                            <span>{order}</span>
+                            <span>{ratio}</span>
+                            {warnings?.[0] && <span className="text-ink-3">{warnings[0]}</span>}
+                          </span>
+                        </span>
+                        <span className="label shrink-0">{p.house}</span>
+                      </button>
+                    </li>
+                  );
+                })}
               </ul>
             </Section>
           )}

@@ -43,6 +43,10 @@ export interface LayerMatch {
   perfume: Perfume;
   score: number;
   reason: string;
+  role: "anchor" | "topper" | "bridge";
+  order: string;
+  ratio: string;
+  warnings?: string[];
 }
 
 /** Accord → relative strength in 0..1 (dominant accord = 1). Falls back to a
@@ -56,6 +60,22 @@ function accordMap(p: Perfume): Map<string, number> {
   } else {
     p.profile.keyAccords.forEach((k, i) => m.set(k.toLowerCase(), Math.max(0.4, 1 - i * 0.12)));
   }
+  return m;
+}
+
+/** Note → strength in 0..1. Base notes matter most for blending, top notes for lift. */
+function noteMap(p: Perfume): Map<string, number> {
+  const m = new Map<string, number>();
+  const add = (notes: string[], weight: number) => {
+    notes.forEach((note, i) => {
+      const key = note.toLowerCase();
+      const v = Math.max(0.35, weight - i * 0.06);
+      m.set(key, Math.max(m.get(key) ?? 0, v));
+    });
+  };
+  add(p.profile.topNotes, 0.72);
+  add(p.profile.heartNotes, 0.86);
+  add(p.profile.baseNotes, 1);
   return m;
 }
 
@@ -80,6 +100,14 @@ function depth(p: Perfume, m: Map<string, number>): number {
   const sil = p.profile.sillage;
   if (sil === "enormous" || sil === "strong") d += 0.3;
   return d;
+}
+
+function axisTotal(m: Map<string, number>, axes: string[]): number {
+  return axes.reduce((sum, axis) => sum + axisStrength(m, axis), 0);
+}
+
+function hasAny(m: Map<string, number>, accords: string[]): number {
+  return accords.reduce((best, accord) => Math.max(best, m.get(accord) ?? 0), 0);
 }
 
 /** Cosine similarity of two accord maps (used to diversify the shortlist). */
@@ -110,6 +138,73 @@ function dayNightSim(a: Perfume, b: Perfume): number {
 
 const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 
+function roleFor(baseDepth: number, otherDepth: number, baseMap: Map<string, number>, otherMap: Map<string, number>): LayerMatch["role"] {
+  const delta = otherDepth - baseDepth;
+  const otherBright = axisTotal(otherMap, BRIGHT_AXES);
+  const otherDeep = axisTotal(otherMap, DEEP_AXES);
+  const baseDeep = axisTotal(baseMap, DEEP_AXES);
+
+  if (delta > 0.55 || (otherDeep > baseDeep + 0.7 && otherDeep > otherBright)) return "anchor";
+  if (delta < -0.55 || otherBright > otherDeep + 0.55) return "topper";
+  return "bridge";
+}
+
+function wearingPlan(role: LayerMatch["role"]): Pick<LayerMatch, "order" | "ratio"> {
+  if (role === "anchor") return { order: "Partner first", ratio: "1 spray partner, 2 sprays current" };
+  if (role === "topper") return { order: "Current first", ratio: "2 sprays current, 1 spray partner" };
+  return { order: "Either order", ratio: "1 spray each" };
+}
+
+function clashWarnings(
+  base: Perfume,
+  other: Perfume,
+  baseMap: Map<string, number>,
+  otherMap: Map<string, number>,
+  baseDepth: number,
+  otherDepth: number
+): { multiplier: number; warnings: string[] } {
+  const warnings: string[] = [];
+  let multiplier = 1;
+
+  const baseAquatic = hasAny(baseMap, ["aquatic", "marine", "ozonic", "watery", "salty", "mineral"]);
+  const otherAquatic = hasAny(otherMap, ["aquatic", "marine", "ozonic", "watery", "salty", "mineral"]);
+  const baseDark = axisStrength(baseMap, "dark");
+  const otherDark = axisStrength(otherMap, "dark");
+  if ((baseAquatic > 0.55 && otherDark > 0.7) || (otherAquatic > 0.55 && baseDark > 0.7)) {
+    multiplier *= 0.78;
+    warnings.push("Test lightly: aquatic and dark notes can clash");
+  }
+
+  const basePowdery = hasAny(baseMap, ["powdery", "soapy", "iris", "violet"]);
+  const otherPowdery = hasAny(otherMap, ["powdery", "soapy", "iris", "violet"]);
+  const baseSmoke = hasAny(baseMap, ["smoky", "leather", "tobacco", "incense"]);
+  const otherSmoke = hasAny(otherMap, ["smoky", "leather", "tobacco", "incense"]);
+  if ((basePowdery > 0.6 && otherSmoke > 0.65) || (otherPowdery > 0.6 && baseSmoke > 0.65)) {
+    multiplier *= 0.84;
+    warnings.push("Powder and smoke can turn harsh");
+  }
+
+  const baseSweet = axisStrength(baseMap, "sweet");
+  const otherSweet = axisStrength(otherMap, "sweet");
+  const summer = Math.min(
+    base.profile.seasons.find((s) => s.season === "summer")?.strength ?? 0,
+    other.profile.seasons.find((s) => s.season === "summer")?.strength ?? 0
+  );
+  if (Math.max(baseSweet, otherSweet) > 0.82 && summer > 0.65) {
+    multiplier *= 0.9;
+    warnings.push("Go lighter in heat");
+  }
+
+  const baseLoud = baseDepth > 2.1 || base.profile.sillage === "strong" || base.profile.sillage === "enormous";
+  const otherLoud = otherDepth > 2.1 || other.profile.sillage === "strong" || other.profile.sillage === "enormous";
+  if (baseLoud && otherLoud) {
+    multiplier *= 0.82;
+    warnings.push("Both are dense; keep sprays low");
+  }
+
+  return { multiplier, warnings: warnings.slice(0, 2) };
+}
+
 interface Scored extends LayerMatch {
   map: Map<string, number>;
 }
@@ -119,6 +214,7 @@ export function layeringPartners(base: Perfume, all: Perfume[], limit = 6): Laye
   const baseFam = base.profile.family;
   const complements = COMPLEMENT[baseFam] ?? [];
   const baseMap = accordMap(base);
+  const baseNotes = noteMap(base);
   const baseDepth = depth(base, baseMap);
 
   const scored: Scored[] = [];
@@ -128,6 +224,8 @@ export function layeringPartners(base: Perfume, all: Perfume[], limit = 6): Laye
     if (base.impressionOf && other.impressionOf && base.impressionOf === other.impressionOf) continue;
 
     const otherMap = accordMap(other);
+    const otherNotes = noteMap(other);
+    const otherDepth = depth(other, otherMap);
 
     // 1) Bridge — weighted overlap of shared accords (so they blend).
     let bridge = 0;
@@ -135,6 +233,14 @@ export function layeringPartners(base: Perfume, all: Perfume[], limit = 6): Laye
     for (const [k, bw] of baseMap) {
       const ow = otherMap.get(k);
       if (ow) { const v = Math.min(bw, ow); bridge += v; shared.push([k, v]); }
+    }
+
+    // Exact note bridges are especially useful for real-world layering.
+    let noteBridge = 0;
+    const sharedNotes: [string, number][] = [];
+    for (const [k, bw] of baseNotes) {
+      const ow = otherNotes.get(k);
+      if (ow) { const v = Math.min(bw, ow); noteBridge += v; sharedNotes.push([k, v]); }
     }
 
     // 2) Complement — partner brings an axis the base lacks (valued most),
@@ -150,16 +256,16 @@ export function layeringPartners(base: Perfume, all: Perfume[], limit = 6): Laye
     }
 
     // 3) Role pairing — anchor + lifter. Reward depth contrast.
-    const contrast = Math.abs(baseDepth - depth(other, otherMap));
+    const contrast = Math.abs(baseDepth - otherDepth);
 
     // 4) Curated family prior — a light, rank-weighted nudge.
     const compIndex = complements.indexOf(other.profile.family);
     const famBonus = compIndex >= 0 ? 1 - compIndex * 0.15 : other.profile.family === baseFam ? 0.2 : 0;
 
-    let score = bridge * 1.6 + comp * 1.1 + contrast * 0.7 + famBonus;
+    let score = bridge * 1.35 + noteBridge * 1.25 + comp * 1.1 + contrast * 0.7 + famBonus;
 
     // No common ground reads as a clash risk — discount hard.
-    if (bridge < 0.25) score *= 0.45;
+    if (bridge < 0.25 && noteBridge < 0.35) score *= 0.45;
 
     // 5) Context — share a season window and a time of day.
     const context = seasonSim(base, other) * 0.6 + dayNightSim(base, other) * 0.4;
@@ -168,20 +274,28 @@ export function layeringPartners(base: Perfume, all: Perfume[], limit = 6): Laye
     // 6) Trust the data — estimated profiles are noisier.
     if (other.profile.confidence === "low") score *= 0.85;
 
+    const clash = clashWarnings(base, other, baseMap, otherMap, baseDepth, otherDepth);
+    score *= clash.multiplier;
+
     if (score < 0.8) continue;
 
     // ── reason ──
     const reasons: string[] = [];
-    if (baseDepth > 0.4 && depth(other, otherMap) < baseDepth - 0.6) reasons.push("fresh lift over a warm base");
-    else if (baseDepth < depth(other, otherMap) - 0.6) reasons.push("anchors this with depth");
-    if (shared.length) {
+    const role = roleFor(baseDepth, otherDepth, baseMap, otherMap);
+    const plan = wearingPlan(role);
+    if (role === "topper") reasons.push("fresh lift over a warmer base");
+    else if (role === "anchor") reasons.push("anchors this with depth");
+    if (sharedNotes.length) {
+      const top = sharedNotes.sort((a, b) => b[1] - a[1]).slice(0, 2).map(([k]) => k);
+      reasons.push(`shared ${top.join(" + ")}`);
+    } else if (shared.length) {
       const top = shared.sort((a, b) => b[1] - a[1]).slice(0, 2).map(([k]) => k);
       reasons.push(`shared ${top.join(" + ")}`);
     }
     if (bestAdd.gain > 0.45 && reasons.length < 2) reasons.push(`adds ${bestAdd.axis}`);
     const reason = reasons.length ? cap(reasons.slice(0, 2).join(" · ")) : "Complementary accords";
 
-    scored.push({ perfume: other, score, reason, map: otherMap });
+    scored.push({ perfume: other, score, reason, role, ...plan, warnings: clash.warnings, map: otherMap });
   }
 
   scored.sort((a, b) => b.score - a.score);
@@ -201,5 +315,7 @@ export function layeringPartners(base: Perfume, all: Perfume[], limit = 6): Laye
     picked.push(scored.splice(bestIdx, 1)[0]);
   }
 
-  return picked.map(({ perfume, score, reason }) => ({ perfume, score, reason }));
+  return picked.map(({ perfume, score, reason, role, order, ratio, warnings }) => ({
+    perfume, score, reason, role, order, ratio, warnings,
+  }));
 }

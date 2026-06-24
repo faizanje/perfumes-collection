@@ -29,6 +29,13 @@ export const metadata: Metadata = {
   description:
     "A searchable archive of 313 fragrances, with notes, families, seasons, occasions and layering.",
   manifest: "/manifest.webmanifest",
+  icons: {
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+    ],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
+  },
   appleWebApp: { capable: true, statusBarStyle: "black-translucent", title: "The Vault" },
   openGraph: {
     title: "The Vault · A Personal Fragrance Collection",
