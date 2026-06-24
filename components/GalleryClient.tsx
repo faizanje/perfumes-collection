@@ -56,13 +56,20 @@ export function GalleryClient({
     () => (view === "grouped" ? groupPerfumes(results, groupBy, facets) : []),
     [results, groupBy, facets, view]
   );
+  const groupLabel = GROUP_BY_LABELS.find(([v]) => v === groupBy)?.[1] ?? "Collection";
+  const activeFilterCount =
+    filter.families.length +
+    filter.seasons.length +
+    filter.occasions.length +
+    filter.houses.length +
+    (filter.favoritesOnly ? 1 : 0);
 
   return (
     <>
       {/* ── control bar ── */}
-      <div className="sticky top-0 z-30 -mx-4 mb-6 border-b border-line bg-canvas/85 px-4 py-2.5 backdrop-blur-xl sm:mx-0 sm:rounded-xl sm:border">
+      <div className="sticky top-0 z-30 -mx-4 mb-6 border-b border-line bg-canvas/88 px-4 py-2.5 backdrop-blur-xl sm:mx-0 sm:rounded-xl sm:border">
         <div className="flex flex-wrap items-center gap-2">
-          <div className="relative order-1 min-w-[12rem] flex-1">
+          <div className="relative min-w-[13rem] flex-1">
             <Search size={16} strokeWidth={1.8} aria-hidden className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-ink-3" />
             <input
               value={filter.query}
@@ -83,8 +90,36 @@ export function GalleryClient({
             )}
           </div>
 
+          <p className="hidden shrink-0 text-xs text-ink-3 sm:block">
+            <span className="tnum text-ink-2">{results.length}</span> shown
+            <span className="mx-1.5 text-ink-3">/</span>
+            {view === "grouped" ? `Grouped by ${groupLabel}` : `Sorted by ${SORTS.find(([v]) => v === filter.sort)?.[1] ?? "Name"}`}
+          </p>
+
+          <button
+            onClick={() => setFilter({ ...filter, favoritesOnly: !filter.favoritesOnly })}
+            aria-pressed={filter.favoritesOnly}
+            className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-2 text-sm transition-colors ${
+              filter.favoritesOnly ? "border-accent bg-accent text-accent-ink" : "border-line text-ink-2 hover:border-ink-3"
+            }`}
+          >
+            <Heart size={15} strokeWidth={1.8} style={{ fill: filter.favoritesOnly ? "currentColor" : "transparent" }} />
+            <span className="tnum">{ready ? favoriteCount : 0}</span>
+          </button>
+
+          <button
+            onClick={() => setSheetOpen(true)}
+            className="inline-flex items-center gap-1.5 rounded-full border border-line px-3 py-2 text-sm text-ink-2 hover:border-ink-3 lg:hidden"
+          >
+            <SlidersHorizontal size={15} strokeWidth={1.8} />
+            Filters
+            {activeFilterCount > 0 && <span className="tnum text-xs text-ink">{activeFilterCount}</span>}
+          </button>
+        </div>
+
+        <div className="mt-2 flex flex-wrap items-center gap-2">
           {/* view toggle */}
-          <div className="order-3 inline-flex rounded-full border border-line bg-surface p-0.5 sm:order-2" role="tablist" aria-label="View">
+          <div className="inline-flex rounded-full border border-line bg-surface p-0.5" role="tablist" aria-label="View">
             {(["grouped", "gallery"] as ViewMode[]).map((v) => (
               <button
                 key={v}
@@ -102,10 +137,10 @@ export function GalleryClient({
 
           {/* default bottle photo (only when the collection has real house bottles) */}
           {hasHouseBottles && (
-            <div className="order-5 inline-flex items-center gap-1.5 sm:order-2">
-              <span className="label hidden md:inline">Bottle</span>
+            <div className="inline-flex items-center gap-1.5">
+              <span className="label hidden md:inline">Bottle photo</span>
               <div className="inline-flex rounded-full border border-line bg-surface p-0.5" role="group" aria-label="Default bottle photo">
-                {([["original", "Original"], ["house", "Owned"]] as [BottleMode, string][]).map(([v, l]) => (
+                {([["original", "Inspired-by"], ["house", "Owned"]] as [BottleMode, string][]).map(([v, l]) => (
                   <button
                     key={v}
                     onClick={() => setBottleMode(v)}
@@ -123,7 +158,7 @@ export function GalleryClient({
 
           {/* group-by (only meaningful in grouped view) */}
           {view === "grouped" && (
-            <label className="order-4 hidden items-center gap-1.5 sm:flex">
+            <label className="hidden items-center gap-1.5 sm:flex">
               <span className="label">Group</span>
               <select
                 value={groupBy}
@@ -140,7 +175,7 @@ export function GalleryClient({
           {view === "grouped" && (
             <button
               onClick={toggleAll}
-              className="order-4 hidden items-center gap-1.5 rounded-full border border-line px-3 py-1.5 text-sm text-ink-2 transition-colors hover:border-ink-3 hover:text-ink sm:inline-flex"
+              className="hidden items-center gap-1.5 rounded-full border border-line px-3 py-1.5 text-sm text-ink-2 transition-colors hover:border-ink-3 hover:text-ink sm:inline-flex"
               title={allOpen ? "Collapse all groups" : "Expand all groups"}
             >
               {allOpen ? <ChevronsDownUp size={15} strokeWidth={1.8} /> : <ChevronsUpDown size={15} strokeWidth={1.8} />}
@@ -150,7 +185,7 @@ export function GalleryClient({
 
           {/* sort (gallery view) */}
           {view === "gallery" && (
-            <label className="order-4 hidden items-center gap-1.5 sm:flex">
+            <label className="hidden items-center gap-1.5 sm:flex">
               <span className="label">Sort</span>
               <select
                 value={filter.sort}
@@ -163,31 +198,13 @@ export function GalleryClient({
               </select>
             </label>
           )}
-
-          <button
-            onClick={() => setFilter({ ...filter, favoritesOnly: !filter.favoritesOnly })}
-            aria-pressed={filter.favoritesOnly}
-            className={`order-2 inline-flex items-center gap-1.5 rounded-full border px-3 py-2 text-sm transition-colors sm:order-5 ${
-              filter.favoritesOnly ? "border-accent bg-accent text-accent-ink" : "border-line text-ink-2 hover:border-ink-3"
-            }`}
-          >
-            <Heart size={15} strokeWidth={1.8} style={{ fill: filter.favoritesOnly ? "currentColor" : "transparent" }} />
-            <span className="tnum">{ready ? favoriteCount : 0}</span>
-          </button>
-
-          <button
-            onClick={() => setSheetOpen(true)}
-            className="order-5 inline-flex items-center gap-1.5 rounded-full border border-line px-3 py-2 text-sm text-ink-2 hover:border-ink-3 lg:hidden"
-          >
-            <SlidersHorizontal size={15} strokeWidth={1.8} /> Filters
-          </button>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 gap-8 lg:grid-cols-[14rem_minmax(0,1fr)]">
+      <div className="grid grid-cols-1 gap-8 lg:grid-cols-[17rem_minmax(0,1fr)] xl:grid-cols-[18rem_minmax(0,1fr)]">
         {/* desktop rail */}
         <aside className="hidden lg:block">
-          <div className="sticky top-[5.25rem] max-h-[calc(100vh-6.5rem)] overflow-y-auto pr-2">
+          <div className="sticky top-[7.25rem] max-h-[calc(100vh-8.5rem)] overflow-y-auto pr-2">
             <Filters facets={facets} filter={filter} setFilter={setFilter} resultCount={results.length} />
           </div>
         </aside>

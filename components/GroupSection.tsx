@@ -34,11 +34,11 @@ export function GroupSection({
 
   return (
     <section data-family={group.family} className="scroll-mt-24">
-      <header className="sticky top-[3.65rem] z-20 -mx-2 mb-4 px-2">
+      <header className="sticky top-[6.75rem] z-20 -mx-2 mb-4 px-2">
         <button
           onClick={() => setOpen((o) => !o)}
           aria-expanded={open}
-          className="flex w-full items-center gap-3 rounded-md border border-line px-3.5 py-2.5 text-left backdrop-blur-md transition-colors hover:border-line-2"
+          className="group/header flex w-full items-center gap-3 rounded-lg border border-line px-3.5 py-2.5 text-left backdrop-blur-md transition-colors hover:border-ink-3"
           style={{
             background: group.family
               ? "linear-gradient(90deg, color-mix(in oklab, var(--fam) 24%, var(--color-surface)), color-mix(in oklab, var(--fam) 8%, var(--color-surface)))"
@@ -64,8 +64,14 @@ export function GroupSection({
               <h2 className="min-w-0 flex-1 truncate text-lg leading-tight text-ink">{group.label}</h2>
             </>
           )}
-          <span className="tnum rounded-full bg-[color-mix(in_oklab,var(--color-ink)_10%,transparent)] px-2 py-0.5 text-xs text-ink-2">
+          <span className="hidden shrink-0 text-xs text-ink-3 sm:inline">
+            <span className="tnum text-ink-2">{group.items.length}</span> fragrances
+          </span>
+          <span className="tnum shrink-0 rounded-full bg-[color-mix(in_oklab,var(--color-ink)_10%,transparent)] px-2 py-0.5 text-xs text-ink-2 sm:hidden">
             {group.items.length}
+          </span>
+          <span className="hidden shrink-0 text-xs text-ink-3 opacity-0 transition-opacity group-hover/header:opacity-100 md:inline">
+            {open ? "Collapse" : "Expand"}
           </span>
           <ChevronDown
             size={17}

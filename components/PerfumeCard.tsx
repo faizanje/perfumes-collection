@@ -32,13 +32,16 @@ export function PerfumeCard({
   const base = stuck ?? mode;
   const shown: BottleMode = hover && hasBoth ? other(base) : base;
   const houseLabel = perfume.house || "Owned";
+  const imageModeLabel = hasBoth
+    ? shown === "house" ? "Owned photo" : "Inspired-by photo"
+    : houseImg ? "Owned photo" : origImg ? "Inspired-by photo" : null;
 
   return (
     <article
       data-family={profile.family}
       onMouseEnter={() => hasBoth && setHover(true)}
       onMouseLeave={() => hasBoth && setHover(false)}
-      className="group relative isolate flex flex-col overflow-hidden rounded-2xl border transition-[transform,box-shadow] duration-[var(--dur-mid)] ease-out hover:-translate-y-1"
+      className="group relative isolate flex flex-col overflow-hidden rounded-xl border transition-[transform,box-shadow] duration-[var(--dur-mid)] ease-out hover:-translate-y-1"
       style={{
         borderColor: "color-mix(in oklab, var(--fam) 24%, var(--color-line))",
         background: "var(--color-surface)",
@@ -51,9 +54,9 @@ export function PerfumeCard({
         className="flex flex-1 flex-col text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--color-focus)]"
         aria-label={`Open ${perfume.cloneName}`}
       >
-        {/* bottle floats on a dark family-glow panel (transparent PNG) */}
+        {/* bottle floats on a dark family-glow panel */}
         <div
-          className="relative flex h-52 items-center justify-center overflow-hidden"
+          className="relative flex h-48 items-center justify-center overflow-hidden"
           style={{ background: "radial-gradient(125% 90% at 50% 12%, color-mix(in oklab, var(--fam) 30%, var(--color-surface)), var(--color-surface) 72%)" }}
         >
           {hasBoth ? (
@@ -100,23 +103,33 @@ export function PerfumeCard({
             <span className="h-1.5 w-1.5 rounded-full" style={{ background: "var(--fam)" }} />
             {fam.short}
           </span>
-          <span className="absolute bottom-3 left-3.5 rounded-full bg-[rgba(15,12,9,0.5)] px-2 py-1 backdrop-blur-sm">
-            <SeasonGlyphs profile={profile} />
-          </span>
         </div>
 
         {/* info */}
-        <div className="flex flex-1 flex-col px-4 pb-4 pt-3.5">
-          <h3 className="text-[1.32rem] leading-[1.12] text-ink">{perfume.cloneName}</h3>
+        <div className="flex flex-1 flex-col px-4 pb-4 pt-3">
+          <div className="mb-2 flex items-center justify-between gap-2">
+            <span className="rounded-full bg-[rgba(15,12,9,0.34)] px-2 py-1 backdrop-blur-sm">
+              <SeasonGlyphs profile={profile} />
+            </span>
+            {imageModeLabel && <span className="text-[0.68rem] text-ink-3">{imageModeLabel}</span>}
+          </div>
+          <h3 className="text-[1.34rem] leading-[1.08] text-ink">{perfume.cloneName}</h3>
           {perfume.impressionOf && (
-            <p className="mt-1.5 line-clamp-1 text-[0.88rem] text-ink-2">
-              <span className="text-ink-3">{perfume.kind === "hybrid" ? "blend · " : perfume.isOriginal ? "" : "after "}</span>
+            <p className="mt-1.5 line-clamp-1 text-[0.9rem] text-ink-2">
+              <span className="text-ink-3">{perfume.kind === "hybrid" ? "Blend of " : perfume.isOriginal ? "" : "Inspired by "}</span>
               {perfume.impressionOf}
             </p>
           )}
-          <p className="mt-3 line-clamp-1 text-[0.78rem] capitalize text-ink-3">
-            {profile.keyAccords.slice(0, 4).join("  ·  ")}
-          </p>
+          <div className="mt-3 flex flex-wrap gap-1.5">
+            {profile.keyAccords.slice(0, 3).map((accord) => (
+              <span
+                key={accord}
+                className="rounded-full border border-line bg-[rgba(15,12,9,0.22)] px-2 py-0.5 text-[0.72rem] capitalize text-ink-2"
+              >
+                {accord}
+              </span>
+            ))}
+          </div>
           <div className="mt-auto flex items-center justify-between gap-2 pt-3">
             <span className="truncate text-[0.66rem] uppercase tracking-[0.1em] text-ink-3" title={perfume.house}>{perfume.house}</span>
             {profile.source !== "fragrantica" && (
@@ -128,8 +141,8 @@ export function PerfumeCard({
 
       {/* controls overlaid on the image panel — siblings of the open-button to
           avoid nesting interactive elements inside it. The overlay matches the
-          h-52 image so the toggle lands at the image's bottom-right. */}
-      <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-52">
+          h-48 image so the toggle lands at the image's bottom-right. */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-48">
         <span className="pointer-events-auto absolute right-3 top-3 flex h-7 w-7 items-center justify-center rounded-full bg-[rgba(15,12,9,0.5)] backdrop-blur-sm">
           <FavoriteButton id={perfume.id} />
         </span>
@@ -142,7 +155,7 @@ export function PerfumeCard({
             className="pointer-events-auto absolute bottom-3 right-3 inline-flex items-center gap-1.5 rounded-full bg-[rgba(15,12,9,0.62)] px-2.5 py-1 text-[0.62rem] font-semibold uppercase tracking-wide text-white backdrop-blur-sm transition-colors hover:bg-[rgba(15,12,9,0.82)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)]"
           >
             <ArrowLeftRight size={11} strokeWidth={2.2} aria-hidden />
-            {shown === "house" ? houseLabel : "Original"}
+            {shown === "house" ? "Owned" : "Inspired-by"}
           </button>
         )}
       </div>

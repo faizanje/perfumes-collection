@@ -85,8 +85,16 @@ export function WearClient({
               {matches.length} suggestion{matches.length > 1 ? "s" : ""}, best first
             </p>
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
-              {matches.map(({ perfume }) => (
-                <PerfumeCard key={perfume.id} perfume={perfume} onOpen={setSelected} />
+              {matches.map(({ perfume, fit, reasons }) => (
+                <div key={perfume.id} className="min-w-0">
+                  <div className="mb-2 flex min-h-7 items-center gap-2 rounded-lg border border-line bg-surface px-3 py-1.5">
+                    <span className="shrink-0 text-xs font-semibold text-ink">{fit}</span>
+                    <span className="min-w-0 truncate text-xs text-ink-3">
+                      {reasons.join(" / ")}
+                    </span>
+                  </div>
+                  <PerfumeCard perfume={perfume} onOpen={setSelected} />
+                </div>
               ))}
             </div>
           </>
