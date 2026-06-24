@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { ChevronDown } from "lucide-react";
 import type { Group } from "@/lib/group";
 import type { Perfume } from "@/lib/types";
 import { PerfumeCard } from "./PerfumeCard";
@@ -36,21 +37,17 @@ export function GroupSection({
           <span className="tnum rounded-full bg-[color-mix(in_oklab,var(--color-ink)_10%,transparent)] px-2 py-0.5 text-xs text-ink-2">
             {group.items.length}
           </span>
-          <svg
-            viewBox="0 0 24 24"
-            className={`h-4 w-4 shrink-0 text-ink-3 transition-transform duration-[var(--dur-fast)] ease-out ${open ? "" : "-rotate-90"}`}
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
+          <ChevronDown
+            size={17}
+            strokeWidth={2}
+            className={`shrink-0 text-ink-3 transition-transform duration-[var(--dur-fast)] ease-out ${open ? "" : "-rotate-90"}`}
             aria-hidden
-          >
-            <path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
+          />
         </button>
       </header>
 
       {open && (
-        <div className="mb-10 grid grid-cols-[repeat(auto-fill,minmax(230px,1fr))] gap-3.5">
+        <div className="mb-10 grid grid-cols-[repeat(auto-fill,minmax(264px,1fr))] gap-3.5">
           {group.items.map((p) => (
             <PerfumeCard key={p.id} perfume={p} onOpen={onOpen} />
           ))}

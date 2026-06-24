@@ -3,19 +3,19 @@
   "families": [
     [
       "Fresh / Citrus",
-      94
-    ],
-    [
-      "Aromatic / Fresh",
-      60
+      99
     ],
     [
       "Amber / Oriental",
-      40
+      50
     ],
     [
       "Woody",
-      38
+      44
+    ],
+    [
+      "Aromatic / Fresh",
+      42
     ],
     [
       "Fruity",
@@ -23,19 +23,19 @@
     ],
     [
       "Gourmand / Sweet",
-      23
+      19
+    ],
+    [
+      "Oud / Animalic",
+      15
     ],
     [
       "Floral",
       14
     ],
     [
-      "Oud / Animalic",
-      13
-    ],
-    [
       "Leather / Smoky",
-      5
+      4
     ]
   ],
   "houses": [
@@ -170,54 +170,54 @@
   ],
   "seasons": [
     [
+      "spring",
+      243
+    ],
+    [
       "fall",
-      208
+      218
     ],
     [
       "summer",
-      190
+      215
     ],
     [
       "winter",
-      168
-    ],
-    [
-      "spring",
-      164
+      135
     ]
   ],
   "occasions": [
     [
       "Daily",
-      241
+      283
     ],
     [
       "Office",
-      236
+      283
     ],
     [
       "Casual",
-      236
+      283
     ],
     [
       "Evening",
-      202
+      277
     ],
     [
       "Date night",
-      202
+      277
     ],
     [
       "Versatile",
-      135
+      247
     ],
     [
       "Night out",
-      129
+      197
     ],
     [
       "Special occasion",
-      129
+      197
     ]
   ]
 }

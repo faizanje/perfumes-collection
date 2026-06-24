@@ -1,88 +1,83 @@
 # Architecture
 
-## Overview
-
-A static Next.js (App Router) app. There is **no backend** yet — all fragrance data is
-compiled to JSON at build time by the Python pipeline and imported directly. Per-user state
-(favorites, notes, ratings) lives in the browser's `localStorage`.
+Static Next.js (App Router) app. **No backend** — fragrance data is compiled to JSON by the
+Python pipeline and imported; per-user state (favorites/notes) lives in `localStorage`.
 
 ```
-                         build time                         runtime (browser)
-  data/sources/*  ──▶  scripts/*.py  ──▶  data/generated/*.json
-                                                  │
-                                                  ▼
-                                           lib/data.ts  ──▶  server components (page.tsx)
-                                                  │                     │ props
-                                                  ▼                     ▼
-                                       lib/{layering,recommend,filter}  client islands
-                                                                        │
-                                              lib/userMeta.tsx (localStorage) ◀── favorites/notes
+data/sources/*  ──▶  scripts/*  ──▶  data/generated/*.json + public/img/*.png
+                                              │
+                                              ▼
+                                       lib/data.ts ──▶ server components (page.tsx, wear/page.tsx)
+                                              │                    │ props (plain data)
+                                              ▼                    ▼
+                              lib/{group,filter,layering,recommend}   client islands
+                                                                      │
+                                  lib/userMeta.tsx (localStorage) ◀── favorites/notes/ratings
 ```
 
-## The two seams (most important design decision)
+## The two seams (key decision)
 
-Everything that could change when we add collaboration is funneled through **two files**:
+Everything that changes when collaboration is added is funneled through **two files**:
 
 | Seam | File | v1 (now) | v2 (collaboration) |
 | --- | --- | --- | --- |
-| Fragrance data | `lib/data.ts` | imports static JSON | Supabase `select` queries |
-| User state | `lib/userMeta.tsx` | React context over `localStorage` | Supabase rows keyed by user id |
+| Fragrance data | `lib/data.ts` | imports generated JSON | Supabase queries |
+| User state | `lib/userMeta.tsx` | React context over `localStorage` | Supabase rows per user |
 
-No component imports `data/**` or calls `localStorage` directly. So moving to a real backend
-is a change to these two files — the component tree, types, and logic are untouched.
+No component imports `data/**` or calls `localStorage` directly.
 
-## Server vs. client
+## Server vs client
 
-- **Server components** (`app/page.tsx`, `app/wear/page.tsx`) call `lib/data.ts`, then pass
-  plain serializable data into client islands. They ship no JS for data loading.
+- **Server components** (`app/page.tsx`, `app/wear/page.tsx`) read `lib/data.ts`, pass plain data
+  to client islands.
 - **Client islands** (`"use client"`): `GalleryClient`, `WearClient`, `PerfumeDetail`,
-  `Filters`, `PerfumeCard`, `FavoriteButton` — anything with state or interaction.
-- `UserMetaProvider` (in `app/layout.tsx`) wraps the app so favorites/notes are global.
+  `GroupSection`, `PerfumeCard`, `Filters`, `FavoriteButton`, `ThemeToggle`.
+- `UserMetaProvider` wraps the app in `app/layout.tsx`; the theme is set pre-paint by an inline
+  script (no flash) and toggled by `ThemeToggle`.
 
 ## Module map (`lib/`)
 
 | File | Responsibility |
 | --- | --- |
-| `types.ts` | `Perfume`, `Profile`, `Facets`, `Season`, `Confidence` |
-| `data.ts` | `getCollection()`, `getPerfume(id)`, `getFacets()`, `getByFamily()` — the data seam |
-| `userMeta.tsx` | `UserMetaProvider` + `useUserMeta()` — favorites, notes, ratings (the state seam) |
-| `families.ts` | family metadata, season labels/glyphs |
-| `filter.ts` | `applyFilters()` — search + multi-facet filter + sort |
-| `layering.ts` | `layeringPartners()` — complementary-family + bridge-accord scoring |
-| `recommend.ts` | `recommend()` — season/occasion/time scoring for "what to wear" |
+| `types.ts` | `Perfume`, `Profile` (accords, notes, seasons, dayNight, accordWeights, imageUrl, parentImages…) |
+| `data.ts` | `getCollection / getPerfume / getFacets` — the data seam |
+| `userMeta.tsx` | favorites / notes / ratings (the state seam) |
+| `families.ts` | fragrance-family metadata (name, short blurb) |
+| `seasons.tsx` | season → lucide icon + color; day/night meta |
+| `refData.ts` | `accordColor(name)` + `noteImage(name)` from the generated reference maps |
+| `group.ts` | bucket perfumes by collection / house / family / season |
+| `filter.ts` | search + multi-facet filter + sort |
+| `layering.ts` | complementary-family + bridge-accord layering partners |
+| `recommend.ts` | season/occasion/time scoring for "what to wear" |
 
-## Data shape
+## Components
 
-Each of the 313 entries in `collection.json`:
+- **PerfumeCard** — transparent bottle on a family-glow panel (or two parent bottles for hybrids,
+  or a monogram); family pill, season icons, name, "after <original>", accords, house.
+- **PerfumeDetail** (drawer) — bottle, weighted accord bars (real colors, `viz.AccordBars`), note
+  pyramid with icons (`viz.NoteRow`), when-to-wear season + day/night bars (`viz.SeasonStrip`),
+  layering partners, personal notes/rating, Fragrantica link.
+- **GalleryClient** — control bar (search, view toggle, group-by, sort, favorites, filters),
+  desktop filter rail, grouped/gallery content, mobile filter sheet, detail drawer.
+- **GroupSection** — collapsible section per group with colored header + count.
+- **viz.tsx** — `AccordBars`, `SeasonStrip`, `SeasonGlyphs`, `NoteRow` (shared data visuals).
+
+## Data shape (each of 313 in `collection.json`)
 
 ```ts
-{
-  id, cloneName, house, group, kind,        // kind: single | hybrid | own | original
-  isOriginal, impressionOf, impressionRaw,
-  profile: {
-    family, keyAccords[], topNotes[], heartNotes[], baseNotes[],
-    seasons: [{season, strength}], occasions[], timeOfDay[],
-    longevity, sillage, mood,
-    confidence: "high"|"medium"|"low", needsReview,
-    originalName, originalBrand, year, gender, rating,
-    isBlend?, parents?, isHouseOriginal?
-  }
-}
+{ id, cloneName, house, group, kind /* single|hybrid|own|original */, isOriginal,
+  impressionOf, profile: {
+    family, keyAccords[], accordWeights{accord:pct}, topNotes[], heartNotes[], baseNotes[],
+    seasons:[{season,strength}], dayNight:{day,night}, timeOfDay[], occasions[],
+    mood, longevity, sillage, rating, gender, confidence, needsReview, source,
+    originalName, originalUrl, imageUrl, parentImages[]  // hybrids
+  } }
 ```
 
-`facets.json` carries pre-counted families / houses / seasons / occasions for the filters.
+`facets.json` = pre-counted families/houses/groups/seasons/occasions for filters.
+`accord_colors.json` / `note_images.json` = reference maps used by `lib/refData.ts`.
 
 ## Routing
 
-- `/` — masthead + family legend + gallery (search, filters, sort, detail drawer).
-- `/wear` — season × occasion × time finder.
-- Detail is an in-page drawer (not a route) so it overlays from anywhere; Escape/scrim close.
-
-## Why these choices
-
-- **Static JSON, no DB:** 313 records are tiny; static means free hosting, instant loads, and
-  a trivially shareable URL — matching the brief (view-only share, easy mobile access).
-- **Drawer over per-perfume route:** keeps the gallery context; the whole-site share link is
-  the sharing unit, not deep links.
-- **Derived fields in the pipeline:** season/occasion/mood are computed from accords once, so
-  the UI never re-derives and data stays consistent across the app.
+`/` masthead + gallery (grouped default) · `/wear` finder. Detail is an in-page drawer
+(overlays from anywhere; Esc/scrim closes) — the share unit is the whole site, not deep links.

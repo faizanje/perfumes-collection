@@ -28,3 +28,6 @@ __pycache__/
 /data/build/
 #
 # COMMITTED (the app reads only this): data/generated/*.json
+
+# image processing temp
+public/img/.tmp.jpg

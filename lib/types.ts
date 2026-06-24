@@ -15,6 +15,7 @@ export interface Profile {
   seasons: SeasonStrength[];
   occasions: string[];
   timeOfDay: string[];
+  dayNight?: { day: number; night: number } | null;
   longevity: string | null;
   sillage: string | null;
   mood: string;
@@ -27,7 +28,12 @@ export interface Profile {
   rating?: number | null;
   isBlend?: boolean;
   parents?: string[];
+  parentImages?: string[] | null;
   isHouseOriginal?: boolean;
+  accordWeights?: Record<string, number> | null;
+  imageUrl?: string | null;
+  originalUrl?: string | null;
+  source?: string | null;
 }
 
 export interface Perfume {

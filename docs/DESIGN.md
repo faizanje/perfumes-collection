@@ -1,71 +1,61 @@
-# Design System
+# Design
 
-Editorial-luxury, anti-templated. Built with the Hallmark design discipline. Warm paper &
-ink, fragrance-family color-coding, serif display. No bottle photos — typography carries it.
+Dark-default, dual-theme, **bold & colorful** "fragrance vault." The nine fragrance-family colors
+are the primary visual system. This is the *keeper* direction (see
+[USER_PREFERENCES.md](USER_PREFERENCES.md) for the rejected ones — don't go back to pale/restrained).
 
-## Tokens
+## Theme
 
-All design values are CSS custom properties in [`app/globals.css`](../app/globals.css)
-(`:root`) and surfaced to Tailwind in `tailwind.config.ts`. **Never inline raw hex/OKLCH in
-components** — reference a token.
+`data-theme="dark|light"` on `<html>`, **default dark**, persisted to `localStorage` (`pc.theme`),
+applied pre-paint by an inline script (no flash). `ThemeToggle` (lucide Sun/Moon) in the header.
 
-- **Neutrals (OKLCH):** `--color-paper` / `-2` / `-3` (warm off-whites), `--color-ink` /
-  `-2` / `-3` (warm near-blacks), `--color-line` (hairline).
-- **Type:** `--font-display` (Fraunces), `--font-sans` (Inter), `--font-mono` (IBM Plex
-  Mono, used for the uppercase `.label` micro-labels).
-- **Scale:** `--text-*` (xs → display), `--space-*` (4-pt), `--radius-*`, `--ease-*`,
-  `--dur-*`.
+## Color (OKLCH, in `app/globals.css`)
 
-## Fragrance-family colors
+- **Dark (default):** deep warm-charcoal canvas/surface, near-white ink, warm-gold accent.
+- **Light:** warm off-white surfaces, dark ink.
+- **9 fragrance families:** theme-independent vivid hues, resolved via `[data-family]` → `--fam`
+  (Fresh=azure, Aromatic=green, Woody=tan, Amber=amber, Fruity=coral, Gourmand=caramel, Oud=plum,
+  Floral=pink, Leather=bronze). Used for card glow/pill/borders.
 
-Nine families each get an OKLCH accent token (`--fam-fresh`, `--fam-woody`, …). Components
-set `data-family="<family>"` on a wrapper; `globals.css` resolves `--fam` from it, so any
-descendant can use `var(--fam)` for dots, spines, washes, and tints. Add a family by adding
-one `--fam-*` token + one `[data-family="…"]` rule, and an entry in `lib/families.ts`.
+### Real Fragrantica colors (important — NOT a single family color)
 
-| Family | Hue |
-| --- | --- |
-| Fresh / Citrus | sky blue |
-| Aromatic / Fresh | teal-green |
-| Woody | warm brown |
-| Amber / Oriental | amber |
-| Fruity | coral red |
-| Gourmand / Sweet | caramel |
-| Oud / Animalic | plum |
-| Floral | rose pink |
-| Leather / Smoky | dark tobacco |
+- **Accords**: each accord uses its **true Fragrantica hex** from `generated/accord_colors.json`
+  (citrus=chartreuse, woody=brown, amber=orange…). Rendered as weighted horizontal bars
+  (`viz.AccordBars`) using `accordWeights`.
+- **Seasons**: each its own color + lucide icon (`lib/seasons.tsx`): spring=green Flower2,
+  summer=red Umbrella, autumn=orange Leaf, winter=blue Snowflake; day=gold Sun, night=indigo Moon.
+  Rendered as horizontal strength bars (`viz.SeasonStrip`) — long bar = more suitable.
 
-## Type
+## Typography
 
-- Headings: Fraunces, **roman only** (no italic headers — a deliberate anti-AI-slop rule),
-  weight ~460, tight tracking, `overflow-wrap: anywhere`.
-- Body: Inter. Micro-labels: IBM Plex Mono uppercase via the `.label` utility.
+Fraunces (display/headings, roman only) · Inter (UI/body) · IBM Plex Mono (`.label` micro-labels).
+
+## Imagery
+
+Transparent bottle PNGs (background removed via rembg/birefnet, normalized to 3:4) on a dark
+family-glow panel — like Fragrantica, no white box. Note pyramid uses round **note icons**
+(`generated/note_images.json`). Hybrids show **two parent bottles** fanned with a "+". Image-less
+entries get a typographic monogram tile. See [DATA_PIPELINE.md](DATA_PIPELINE.md) § Images.
+
+## Icons
+
+**lucide-react** everywhere (Heart, Sun/Moon, Search, ChevronDown, SlidersHorizontal, season
+icons). No hand-drawn SVG paths or unicode glyphs.
+
+## Layout
+
+- Control bar: search · view toggle (Grouped ⇄ Gallery) · group-by · sort · favorites · filters.
+- Grouped view (default): collapsible sections; group-by collection/house/family/season.
+- Card grid: `repeat(auto-fill, minmax(264px, 1fr))` (bigger cards).
+- Detail: right-side drawer.
 
 ## Motion
 
-- Transitions only on `transform` / `opacity`; named easings (`--ease-out`, etc.), never raw
-  `ease`. Card hover = subtle lift; drawer = slide-in; sheet = rise. Max a few primitives.
-- `prefers-reduced-motion` collapses everything to near-instant.
+150–250ms, ease-out. Card hover lift + bottle scale, drawer slide, section collapse, bar grows.
+Full `prefers-reduced-motion` fallback.
 
-## Layout & responsiveness
+## Skills used
 
-- `max-w-shell` (78rem) content column. Gallery grid: 1 col → 2 (sm) → 3 (xl), with
-  `minmax(0,1fr)` tracks.
-- Mobile: filters move into a bottom sheet; `overflow-x: clip` on `html`/`body` guarantees no
-  horizontal scroll. Verified at 320 / 375 / 414 / 768 px.
-
-## Components
-
-- **PerfumeCard** — family spine + tinted wash, serif name, "impression of", accords, house,
-  favourite heart. Opens the drawer.
-- **PerfumeDetail** — drawer: note pyramid (top/heart/base), accords, when-to-wear
-  (seasons/time/occasions), longevity/sillage, **layering partners with reasons**, and the
-  owner's note + star rating. Shows an "unverified" mark for low-confidence data.
-- **Filters** — family / season / occasion / house, with live counts.
-- **GalleryClient / WearClient** — the two interactive surfaces.
-
-## Stamp
-
-`app/globals.css` begins with the Hallmark stamp recording the macrostructure/theme; the
-design log is `.hallmark/log.json`. If redesigning, rotate per Hallmark's diversification
-rule.
+Built with **Hallmark** (early light version) then **Impeccable** (PRODUCT.md/DESIGN.md exist).
+The current direction is "elevated option 2" — apply Impeccable discipline (real colors, hierarchy,
+craft) but keep it dark and colorful, never restrained/pale.

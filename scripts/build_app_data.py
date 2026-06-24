@@ -22,7 +22,22 @@ from enrich_from_dataset import (derive_family, derive_seasons, derive_occasions
 ROOT = Path(__file__).resolve().parent.parent
 BUILD = ROOT / "data" / "build"
 OUT = ROOT / "data" / "generated"
+PUBLIC_IMG = ROOT / "public" / "img"
 OUT.mkdir(parents=True, exist_ok=True)
+
+
+def local_image(orig):
+    """Bottle image — hotlink Fragrantica's own **transparent** dark-mode webp
+    (`dark-375x500.<id>.webp`): a bottle on a transparent background that works on any
+    surface. No downloading/processing/storage, no artifacts, consistent 375x500 sizing.
+    A manual clone-house image by slug wins for the ~21 not on Fragrantica."""
+    slug = orig.get("slug")
+    if slug and (PUBLIC_IMG / f"m-{slug}.png").exists():
+        return f"/img/m-{slug}.png"
+    m = re.search(r"-(\d+)\.html", orig.get("originalUrl") or "")
+    if m:
+        return f"https://fimgs.net/mdimg/perfume-thumbs/dark-375x500.{m.group(1)}.webp"
+    return orig.get("imageUrl")
 
 OWN_HINTS = {
     "green": (["aromatic", "green", "woody", "fresh"], "Aromatic / Fresh",
@@ -63,6 +78,7 @@ def merge_profiles(a, b, name):
         "mood": f"A hybrid blend of {a['name']} and {b['name']}.",
         "confidence": "medium", "verified": False, "needsReview": False,
         "isBlend": True, "parents": [a["name"], b["name"]],
+        "parentImages": [img for img in (local_image(a), local_image(b)) if img],
     }
 
 
@@ -91,7 +107,7 @@ def own_profile(impression_raw):
 
 
 PROFILE_FIELDS = ["family", "keyAccords", "topNotes", "heartNotes", "baseNotes",
-                  "seasons", "occasions", "timeOfDay", "longevity", "sillage",
+                  "seasons", "occasions", "timeOfDay", "dayNight", "longevity", "sillage",
                   "mood", "confidence", "needsReview"]
 
 
@@ -102,6 +118,10 @@ def slim(orig):
     p["year"] = orig.get("year")
     p["gender"] = orig.get("gender")
     p["rating"] = orig.get("rating")
+    p["imageUrl"] = local_image(orig)
+    p["originalUrl"] = orig.get("originalUrl")
+    p["accordWeights"] = orig.get("accordWeights")
+    p["source"] = orig.get("source")
     return p
 
 

@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import type { Facets, Perfume, Season } from "@/lib/types";
-import { SEASON_GLYPH, SEASON_LABEL } from "@/lib/families";
+import { SEASON_META } from "@/lib/seasons";
 import { recommend, type WearQuery } from "@/lib/recommend";
 import { PerfumeCard } from "./PerfumeCard";
 import { PerfumeDetail } from "./PerfumeDetail";
@@ -28,16 +28,20 @@ export function WearClient({
       <div className="rounded-md border border-line bg-surface p-5 sm:p-7">
         <Row label="Season">
           <ChipRow>
-            {SEASONS.map((s) => (
-              <Toggle
-                key={s}
-                active={q.season === s}
-                onClick={() => setQ({ ...q, season: q.season === s ? null : s })}
-              >
-                <span className="mr-1">{SEASON_GLYPH[s]}</span>
-                {SEASON_LABEL[s]}
-              </Toggle>
-            ))}
+            {SEASONS.map((s) => {
+              const meta = SEASON_META[s];
+              const Icon = meta.Icon;
+              return (
+                <Toggle
+                  key={s}
+                  active={q.season === s}
+                  onClick={() => setQ({ ...q, season: q.season === s ? null : s })}
+                >
+                  <Icon size={14} strokeWidth={2} style={{ color: meta.color }} className="mr-1.5" />
+                  {meta.label}
+                </Toggle>
+              );
+            })}
           </ChipRow>
         </Row>
 
@@ -121,7 +125,7 @@ function Toggle({
       type="button"
       onClick={onClick}
       aria-pressed={active}
-      className={`rounded-full border px-3.5 py-1.5 text-sm transition-colors duration-[var(--dur-fast)] ease-out ${
+      className={`inline-flex items-center rounded-full border px-3.5 py-1.5 text-sm transition-colors duration-[var(--dur-fast)] ease-out ${
         active ? "border-ink bg-ink text-canvas" : "border-line text-ink-2 hover:border-ink-3 hover:text-ink"
       }`}
     >

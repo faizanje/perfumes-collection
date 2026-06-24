@@ -227,7 +227,12 @@ def split_notes(s):
 
 # ---------------------------------------------------------------- main
 def main():
-    # ---- secondary index: longevity/sillage keyed by normalized full name ----
+    # ---- secondary index: longevity/sillage/image keyed by normalized full name ----
+    def fimg_url(fname):
+        # GitHub dataset image looks like "o.9828.jpg" -> Fragrantica CDN URL
+        m = re.search(r"(\d+)", fname or "")
+        return f"https://fimgs.net/mdimg/perfume/375x500.{m.group(1)}.jpg" if m else None
+
     perf_meta = {}
     if GH.exists():
         for r in csv.DictReader(open(GH, encoding="utf-8-sig")):
@@ -239,8 +244,9 @@ def main():
                                      SILLAGE_LABELS)
             except (json.JSONDecodeError, TypeError):
                 lon = sil = None
-            if lon or sil:
-                perf_meta.setdefault(key, (lon, sil))
+            img = fimg_url(r.get("image"))
+            if lon or sil or img:
+                perf_meta.setdefault(key, (lon, sil, img))
 
     # ---- primary candidates: Kaggle ----
     cands = []
@@ -296,7 +302,7 @@ def main():
         accords = [a for a in accords if a and a != "nan"]
         matched_full = f"{best['Brand']} {best['Perfume']}".replace("-", " ").title()
 
-        lon, sil = perf_meta.get(normalize(f"{best['Brand']} {best['Perfume']}"), (None, None))
+        lon, sil, img = perf_meta.get(normalize(f"{best['Brand']} {best['Perfume']}"), (None, None, None))
         conf = "high" if best_s >= 0.80 else "medium"
         try:
             rating = round(float(best.get("Rating Value") or 0), 2) or None
@@ -320,6 +326,8 @@ def main():
             "longevity": lon,
             "sillage": sil,
             "mood": derive_mood(accords),
+            "originalUrl": (best.get("url") or "").strip() or None,
+            "imageUrl": img,
             "confidence": conf, "verified": False,
             "source": "kaggle", "matchScore": round(best_s, 3),
         }

@@ -22,6 +22,62 @@ from enrich_from_dataset import (derive_family, derive_seasons, derive_occasions
 ROOT = Path(__file__).resolve().parent.parent
 BUILD = ROOT / "data" / "build"
 
+# Fragrantica URLs found via search for originals the dataset couldn't match
+# (keyed by "<brand> <name>" == matchedName). Lets these get scraped for accurate data.
+FOUND_URLS = {
+    "Afnan 9PM Elixir": "https://www.fragrantica.com/perfume/Afnan/9PM-Elixir-111894.html",
+    "Armaf Urban Man Elixir": "https://www.fragrantica.com/perfume/Armaf/Club-De-Nuit-Urban-Elixir-77860.html",
+    "Armaf Club de Nuit Milestone": "https://www.fragrantica.com/perfume/Armaf/Club-de-Nuit-Milestone-64104.html",
+    "Maison Alhambra Victorioso": "https://www.fragrantica.com/perfume/Maison-Alhambra/Victorioso-92617.html",
+    "Fragrance One Office for Men": "https://www.fragrantica.com/perfume/Fragrance-One/Office-For-Men-55166.html",
+    "Issey Miyake Le Sel d'Issey": "https://www.fragrantica.com/perfume/Issey-Miyake/Le-Sel-d-Issey-95642.html",
+    "Louis Vuitton Symphony": "https://www.fragrantica.com/perfume/Louis-Vuitton/Symphony-68357.html",
+    "Louis Vuitton Stellar Times": "https://www.fragrantica.com/perfume/Louis-Vuitton/Stellar-Times-68356.html",
+    "Louis Vuitton Rain Tea": "https://www.fragrantica.com/perfume/Louis-Vuitton/Rain-Tea-115406.html",
+    "Yves Saint Laurent MYSLF": "https://www.fragrantica.com/perfume/Yves-Saint-Laurent/MYSLF-Eau-de-Parfum-84094.html",
+    "Yves Saint Laurent Y Ice Cologne": "https://www.fragrantica.com/perfume/Yves-Saint-Laurent/Y-Iced-Cologne-120529.html",
+    "Le Labo Mousse de Chêne 30 (Amsterdam)": "https://www.fragrantica.com/perfume/Le-Labo/Mousse-de-Chene-30-Amsterdam-46295.html",
+    "Initio Parfums Prives Side Effect": "https://www.fragrantica.com/perfume/Initio-Parfums-Prives/Side-Effect-42260.html",
+    "Amouage Decision": "https://www.fragrantica.com/perfume/Amouage/Decision-103892.html",
+    "Amouage Outlands": "https://www.fragrantica.com/perfume/Amouage/Outlands-97924.html",
+    "Arabian Oud Al Farid": "https://www.fragrantica.com/perfume/Arabian-Oud/Al-Fareed-69012.html",
+    "Ajmal Amber Wood": "https://www.fragrantica.com/perfume/Ajmal/Amber-Wood-26016.html",
+    "Nishane Wulong Cha": "https://www.fragrantica.com/perfume/Nishane/Wulong-Cha-30567.html",
+    "Jo Malone Cypress & Grapevine": "https://www.fragrantica.com/perfume/Jo-Malone-London/Cypress-Grapevine-Cologne-Intense-61928.html",
+    "Gissah Imperial Valley": "https://www.fragrantica.com/perfume/Gissah/Imperial-Valley-80051.html",
+    "CR7 Play It Cool": "https://www.fragrantica.com/perfume/Cristiano-Ronaldo/CR7-Play-It-Cool-60173.html",
+    "Afnan 9PM Rebel": "https://www.fragrantica.com/perfume/Afnan/9-PM-Rebel-99238.html",
+    "Parfums de Marly Castley": "https://www.fragrantica.com/perfume/Parfums-de-Marly/Castley-104991.html",
+    "Room 1015 Wave Child": "https://www.fragrantica.com/perfume/Room-1015/Wavechild-91364.html",
+    "Oud Al Barouz Asrar": "https://www.fragrantica.com/perfume/Rasasi/Oudh-Al-Boruzz-Asrar-Indonesia-45039.html",
+    "Oman Luxury Caden": "https://www.fragrantica.com/perfume/Omanluxury/Caden-105465.html",
+    "Hugo Boss Hugo x Superman": "https://www.fragrantica.com/perfume/Hugo-Boss/Hugo-X-Superman-103872.html",
+    "Lattafa Khamrah Kahwa": "https://www.fragrantica.com/perfume/Lattafa-Perfumes/Khamrah-Qahwa-88175.html",
+    "Lattafa Khamrah Dukhan": "https://www.fragrantica.com/perfume/Lattafa-Perfumes/Khamrah-Dukhan-104529.html",
+    "Afnan 9pm": "https://www.fragrantica.com/perfume/Afnan/9pm-65414.html",
+    "Afnan Supremacy Collector's Edition": "https://www.fragrantica.com/perfume/Afnan/Supremacy-Collector-s-Edition-Pour-Homme-98689.html",
+    "Afnan Turathi Electric": "https://www.fragrantica.com/perfume/Afnan/Turathi-Electric-108244.html",
+    "Lattafa Kaaf": "https://www.fragrantica.com/perfume/Ahmed-Al-Maghribi/Kaaf-102460.html",
+    "Ahmed Al Maghribi Marj": "https://www.fragrantica.com/perfume/Ahmed-Al-Maghribi/Marj-104339.html",
+    "Rasasi Hawas Black": "https://www.fragrantica.com/perfume/Rasasi/Hawas-Black-96817.html",
+    "BTV Emaan": "https://www.fragrantica.com/perfume/Boadicea-the-Victorious/Faith-92443.html",
+}
+
+# Manual corrections: slug -> correct Fragrantica URL, when the dataset matched the
+# WRONG fragrance (e.g. the 1964 women's "Y" instead of the modern men's Y EDP).
+# These reset the entry to be re-scraped from the right page.
+URL_OVERRIDES = {
+    "ysl-y": "https://www.fragrantica.com/perfume/Yves-Saint-Laurent/Y-Eau-de-Parfum-50757.html",
+    "ysl-y-edp": "https://www.fragrantica.com/perfume/Yves-Saint-Laurent/Y-Eau-de-Parfum-50757.html",
+    "k-by-d-g-edp": "https://www.fragrantica.com/perfume/Dolce-Gabbana/K-by-Dolce-Gabbana-Eau-de-Parfum-62311.html",
+    "date-for-men": "https://www.fragrantica.com/perfume/Fragrance-One/Date-For-Men-58376.html",
+    "tk-no-4": "https://www.fragrantica.com/perfume/Thomas-Kosmala/Apres-l-Amour-53742.html",
+    "white-musk": "https://www.fragrantica.com/perfume/Junaid-Jamshed/White-Musk-29215.html",
+    "shuhral-elixir": "https://www.fragrantica.com/perfume/Rasasi/Shuhrah-Elixir-112548.html",
+    "monocline-05": "https://www.fragrantica.com/perfume/Maison-Alhambra/Monocline-05-96835.html",
+    "splendor": "https://www.fragrantica.com/perfume/Seris-Parfums/Splendor-Black-127081.html",
+}
+
 
 def E(name, brand, accords, top=None, heart=None, base=None, conf="medium",
       family=None, gender="men", year=None, review=False):
@@ -205,8 +261,10 @@ MANUAL = {
         conf="low", family="Fresh / Citrus", review=True),
     "euphoric-oud": E("Euphoric Oud", "Arabian House", ["oud", "sweet", "amber", "woody"],
         conf="low", family="Oud / Animalic", gender="unisex", review=True),
-    "addicted": E("Addicted", "Maison Alhambra", ["sweet", "amber", "warm spicy", "woody"],
-        conf="low", family="Amber / Oriental", gender="unisex", review=True),
+    # Addicted by J. (Junaid Jamshed) — not on Fragrantica; accords/family from the
+    # brand's own product page (Fresh Woody · Citrus, Spices, Woody, Leathery).
+    "addicted": E("Addicted", "Junaid Jamshed", ["citrus", "fresh spicy", "woody", "leather"],
+        conf="medium", family="Woody", gender="men", review=False),
     "splendor": E("Splendor", "Arabian House", ["amber", "sweet", "woody"], conf="low",
         family="Amber / Oriental", gender="unisex", review=True),
     "crown": E("Crown", "Arabian House", ["oud", "amber", "woody", "warm spicy"], conf="low",
@@ -224,8 +282,9 @@ MANUAL = {
 def build(slug, m):
     accords = [a.lower() for a in m["keyAccords"]]
     family = m.get("family") or derive_family(accords)
+    matched_name = f"{m['brand']} {m['name']}"
     return {
-        "slug": slug, "name": m["name"], "matchedName": f"{m['brand']} {m['name']}",
+        "slug": slug, "name": m["name"], "matchedName": matched_name,
         "brand": m["brand"], "year": m.get("year"), "gender": m.get("gender"),
         "rating": None, "family": family, "keyAccords": accords,
         "topNotes": m["top"], "heartNotes": m["heart"], "baseNotes": m["base"],
@@ -233,6 +292,8 @@ def build(slug, m):
         "timeOfDay": derive_time(accords), "longevity": None, "sillage": None,
         "mood": derive_mood(accords), "confidence": m["confidence"],
         "verified": False, "needsReview": m.get("needsReview", False),
+        # URL found via search → lets the ingest pull accurate data once scraped
+        "originalUrl": FOUND_URLS.get(matched_name),
         "source": "manual", "matchScore": None,
     }
 
@@ -246,6 +307,14 @@ def main():
         else:
             added += 1
         originals[slug] = build(slug, m)
+
+    # apply URL corrections — point at the right page + flag for re-scrape
+    for slug, url in URL_OVERRIDES.items():
+        if slug in originals:
+            originals[slug]["originalUrl"] = url
+            originals[slug]["source"] = "manual"
+            originals[slug]["verified"] = False
+
     (BUILD / "originals.json").write_text(json.dumps(originals, indent=2, ensure_ascii=False))
 
     rows = json.loads((BUILD / "raw_collection.json").read_text())

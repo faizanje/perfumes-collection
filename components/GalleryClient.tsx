@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
+import { Search, Heart, SlidersHorizontal } from "lucide-react";
 import type { Facets, Perfume } from "@/lib/types";
 import { EMPTY_FILTER, applyFilters, type FilterState } from "@/lib/filter";
 import { GROUP_BY_LABELS, groupPerfumes, type GroupBy } from "@/lib/group";
@@ -49,7 +50,7 @@ export function GalleryClient({
       <div className="sticky top-0 z-30 -mx-4 mb-6 border-b border-line bg-canvas/85 px-4 py-2.5 backdrop-blur-xl sm:mx-0 sm:rounded-xl sm:border">
         <div className="flex flex-wrap items-center gap-2">
           <div className="relative order-1 min-w-[12rem] flex-1">
-            <span aria-hidden className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-ink-3">⌕</span>
+            <Search size={16} strokeWidth={1.8} aria-hidden className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-ink-3" />
             <input
               value={filter.query}
               onChange={(e) => setFilter({ ...filter, query: e.target.value })}
@@ -111,18 +112,19 @@ export function GalleryClient({
           <button
             onClick={() => setFilter({ ...filter, favoritesOnly: !filter.favoritesOnly })}
             aria-pressed={filter.favoritesOnly}
-            className={`order-2 rounded-full border px-3 py-2 text-sm transition-colors sm:order-5 ${
+            className={`order-2 inline-flex items-center gap-1.5 rounded-full border px-3 py-2 text-sm transition-colors sm:order-5 ${
               filter.favoritesOnly ? "border-accent bg-accent text-accent-ink" : "border-line text-ink-2 hover:border-ink-3"
             }`}
           >
-            ♥ <span className="tnum">{ready ? favoriteCount : 0}</span>
+            <Heart size={15} strokeWidth={1.8} style={{ fill: filter.favoritesOnly ? "currentColor" : "transparent" }} />
+            <span className="tnum">{ready ? favoriteCount : 0}</span>
           </button>
 
           <button
             onClick={() => setSheetOpen(true)}
-            className="order-5 rounded-full border border-line px-3 py-2 text-sm text-ink-2 hover:border-ink-3 lg:hidden"
+            className="order-5 inline-flex items-center gap-1.5 rounded-full border border-line px-3 py-2 text-sm text-ink-2 hover:border-ink-3 lg:hidden"
           >
-            Filters
+            <SlidersHorizontal size={15} strokeWidth={1.8} /> Filters
           </button>
         </div>
       </div>
@@ -146,7 +148,7 @@ export function GalleryClient({
               ))}
             </div>
           ) : (
-            <div className="grid grid-cols-[repeat(auto-fill,minmax(230px,1fr))] gap-3.5">
+            <div className="grid grid-cols-[repeat(auto-fill,minmax(264px,1fr))] gap-3.5">
               {results.map((p) => (
                 <PerfumeCard key={p.id} perfume={p} onOpen={setSelected} />
               ))}

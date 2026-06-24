@@ -7,9 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "data": "python3 scripts/parse_xlsx.py && python3 scripts/enrich_from_dataset.py && python3 scripts/merge_manual.py && python3 scripts/build_app_data.py"
+    "data": "python3 scripts/parse_xlsx.py && python3 scripts/enrich_from_dataset.py && python3 scripts/merge_manual.py && python3 scripts/ingest_fragrantica.py && python3 scripts/ingest_scraped.py && python3 scripts/build_reference_maps.py && python3 scripts/build_app_data.py"
   },
   "dependencies": {
+    "lucide-react": "^1.21.0",
     "next": "15.1.6",
     "react": "19.0.0",
     "react-dom": "19.0.0"
