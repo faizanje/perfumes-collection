@@ -1,0 +1,499 @@
+{
+  "arome-collection-1-2": {
+    "img": "/img/a-arome-collection-1-2.png",
+    "handle": "intrinsic",
+    "title": "Intrinsic",
+    "source_img": "https://cdn.shopify.com/s/files/1/0742/9105/2850/files/Intrinsic-Camera.png?v=1750601918",
+    "confidence": "high"
+  },
+  "arome-collection-1-3": {
+    "img": "/img/a-arome-collection-1-3.png",
+    "handle": "sugary-blue",
+    "title": "Sugary Blue",
+    "source_img": "https://cdn.shopify.com/s/files/1/0742/9105/2850/files/sugaryblue-ByArome.png?v=1752072970",
+    "confidence": "high"
+  },
+  "arome-collection-1-5": {
+    "img": "/img/a-arome-collection-1-5.png",
+    "handle": "sel-de-mer-vetiver-edition",
+    "title": "Sel De Mer (Vetiver Edition)",
+    "source_img": "https://cdn.shopify.com/s/files/1/0742/9105/2850/files/Sel_De_Mer_VE-By_Arome.png?v=1751027625",
+    "confidence": "high"
+  },
+  "arome-collection-1-6": {
+    "img": "/img/a-arome-collection-1-6.png",
+    "handle": "gojo",
+    "title": "Gojo",
+    "source_img": "https://cdn.shopify.com/s/files/1/0742/9105/2850/files/Gojo-ByArome_b90681e7-92ae-49d1-a374-45b122ae40fc.png?v=1750600413",
+    "confidence": "high"
+  },
+  "arome-collection-1-7": {
+    "img": "/img/a-arome-collection-1-7.png",
+    "handle": "amier",
+    "title": "Amier",
+    "source_img": "https://cdn.shopify.com/s/files/1/0742/9105/2850/files/Amier-Camera.png?v=1750599056",
+    "confidence": "high"
+  },
+  "arome-collection-1-8": {
+    "img": "/img/a-arome-collection-1-8.png",
+    "handle": "bureau",
+    "title": "Bureau",
+    "source_img": "https://cdn.shopify.com/s/files/1/0742/9105/2850/files/bureau-Camera.png?v=1754058411",
+    "confidence": "high"
+  },
+  "arome-collection-1-10": {
+    "img": "/img/a-arome-collection-1-10.png",
+    "handle": "maracuja-x",
+    "title": "Maracuja X",
+    "source_img": "https://cdn.shopify.com/s/files/1/0742/9105/2850/files/MaracujaX-Camera.png?v=1750602237",
+    "confidence": "high"
+  },
+  "arome-collection-1-12": {
+    "img": "/img/a-arome-collection-1-12.png",
+    "handle": "h2o",
+    "title": "H2O",
+    "source_img": "https://cdn.shopify.com/s/files/1/0742/9105/2850/files/H2O-ByArome_a086a2e5-30a7-4c86-8e12-1924c93d4bcb.png?v=1750600429",
+    "confidence": "high"
+  },
+  "arome-collection-1-13": {
+    "img": "/img/a-arome-collection-1-13.png",
+    "handle": "vardinio",
+    "title": "Vardinio",
+    "source_img": "https://cdn.shopify.com/s/files/1/0742/9105/2850/files/Vardinio-ByArome_8e556847-3dbe-4584-a6b3-2589b4d3f9ac.png?v=1750602742",
+    "confidence": "med"
+  },
+  "arome-collection-1-14": {
+    "img": "/img/a-arome-collection-1-14.png",
+    "handle": "just-blue",
+    "title": "Just Bleu",
+    "source_img": "https://cdn.shopify.com/s/files/1/0742/9105/2850/files/JustBleu-Camera.png?v=1750602098",
+    "confidence": "med"
+  },
+  "arome-collection-1-19": {
+    "img": "/img/a-arome-collection-1-19.png",
+    "handle": "dionysus",
+    "title": "Dionysus",
+    "source_img": "https://cdn.shopify.com/s/files/1/0742/9105/2850/files/Dionysus-Camera.png?v=1754058525",
+    "confidence": "high"
+  },
+  "arome-collection-1-20": {
+    "img": "/img/a-arome-collection-1-20.png",
+    "handle": "hunza",
+    "title": "Hunza",
+    "source_img": "https://cdn.shopify.com/s/files/1/0742/9105/2850/files/Hunza-ByArome_8cb6e03b-400d-460d-b480-c7450ae602f5.png?v=1750601821",
+    "confidence": "high"
+  },
+  "arome-collection-1-22": {
+    "img": "/img/a-arome-collection-1-22.png",
+    "handle": "beau-sublime",
+    "title": "Beau Sublime",
+    "source_img": "https://cdn.shopify.com/s/files/1/0742/9105/2850/files/BeauSublime-ByArome_7c32b8cb-d57e-41d6-a8bd-d9cad0deb093.png?v=1750599491",
+    "confidence": "high"
+  },
+  "arome-collection-1-23": {
+    "img": "/img/a-arome-collection-1-23.png",
+    "handle": "maritime",
+    "title": "Maritime",
+    "source_img": "https://cdn.shopify.com/s/files/1/0742/9105/2850/files/Maritime-ByArome_b1cad0e6-7c11-462c-8f9c-fe6a112f7b86.png?v=1750602262",
+    "confidence": "high"
+  },
+  "arome-collection-1-24": {
+    "img": "/img/a-arome-collection-1-24.png",
+    "handle": "simply-aqva",
+    "title": "Simply Aqva",
+    "source_img": "https://cdn.shopify.com/s/files/1/0742/9105/2850/files/SimplyAqva-ByArome_969122d8-c789-417d-a058-19ee1af6a030.png?v=1750602573",
+    "confidence": "med"
+  },
+  "arome-collection-1-27": {
+    "img": "/img/a-arome-collection-1-27.png",
+    "handle": "wanted",
+    "title": "Most Wanted",
+    "source_img": "https://cdn.shopify.com/s/files/1/0742/9105/2850/files/MostWanted-Camera.png?v=1750602302",
+    "confidence": "high"
+  },
+  "arome-collection-1-29": {
+    "img": "/img/a-arome-collection-1-29.png",
+    "handle": "untamed",
+    "title": "Untamed",
+    "source_img": "https://cdn.shopify.com/s/files/1/0742/9105/2850/files/untamed-Camera.png?v=1752071658",
+    "confidence": "high"
+  },
+  "arome-collection-1-41": {
+    "img": "/img/a-arome-collection-1-41.png",
+    "handle": "vento-blanc",
+    "title": "Vento Blanc",
+    "source_img": "https://cdn.shopify.com/s/files/1/0742/9105/2850/files/vento-Camera.png?v=1754833425",
+    "confidence": "high"
+  },
+  "arome-collection-1-44": {
+    "img": "/img/a-arome-collection-1-44.png",
+    "handle": "qissah",
+    "title": "Qissah",
+    "source_img": "https://cdn.shopify.com/s/files/1/0742/9105/2850/files/Qissah-Camera.png?v=1750602431",
+    "confidence": "med"
+  },
+  "arome-collection-1-46": {
+    "img": "/img/a-arome-collection-1-46.png",
+    "handle": "azmah",
+    "title": "Azmah",
+    "source_img": "https://cdn.shopify.com/s/files/1/0742/9105/2850/files/Azmah-Camera.png?v=1750599330",
+    "confidence": "high"
+  },
+  "arome-collection-1-48": {
+    "img": "/img/a-arome-collection-1-48.png",
+    "handle": "ruh",
+    "title": "Ruh",
+    "source_img": "https://cdn.shopify.com/s/files/1/0742/9105/2850/files/ruh-Camera.png?v=1754577729",
+    "confidence": "high"
+  },
+  "arome-collection-1-49": {
+    "img": "/img/a-arome-collection-1-49.png",
+    "handle": "galactic",
+    "title": "Galactic",
+    "source_img": "https://cdn.shopify.com/s/files/1/0742/9105/2850/files/Galactic-Camera.png?v=1756196280",
+    "confidence": "high"
+  },
+  "arome-collection-1-52": {
+    "img": "/img/a-arome-collection-1-52.png",
+    "handle": "imagination",
+    "title": "L\u2019Ivresse",
+    "source_img": "https://cdn.shopify.com/s/files/1/0742/9105/2850/files/L_Ivresse-ByArome.png?v=1750442540",
+    "confidence": "high"
+  },
+  "arome-collection-1-53": {
+    "img": "/img/a-arome-collection-1-53.png",
+    "handle": "manthoka",
+    "title": "Manthoka",
+    "source_img": "https://cdn.shopify.com/s/files/1/0742/9105/2850/files/Manthoka-Camera.png?v=1767276100",
+    "confidence": "high"
+  },
+  "arome-collection-1-54": {
+    "img": "/img/a-arome-collection-1-54.png",
+    "handle": "euphony",
+    "title": "Euphony",
+    "source_img": "https://cdn.shopify.com/s/files/1/0742/9105/2850/files/Euphony-Camera.png?v=1750599962",
+    "confidence": "high"
+  },
+  "arome-collection-1-55": {
+    "img": "/img/a-arome-collection-1-55.png",
+    "handle": "lumiere",
+    "title": "Lumiere",
+    "source_img": "https://cdn.shopify.com/s/files/1/0742/9105/2850/files/lumiere-Camera.png?v=1770827327",
+    "confidence": "high"
+  },
+  "arome-collection-1-56": {
+    "img": "/img/a-arome-collection-1-56.png",
+    "handle": "apple-splash",
+    "title": "Apple Splash",
+    "source_img": "https://cdn.shopify.com/s/files/1/0742/9105/2850/files/AppleSplash-Camera.png?v=1750599269",
+    "confidence": "high"
+  },
+  "arome-collection-1-57": {
+    "img": "/img/a-arome-collection-1-57.png",
+    "handle": "pineapple-candy",
+    "title": "Pineapple Candy",
+    "source_img": "https://cdn.shopify.com/s/files/1/0742/9105/2850/files/PineappleCandy-Camera.png?v=1756197526",
+    "confidence": "high"
+  },
+  "arome-collection-1-59": {
+    "img": "/img/a-arome-collection-1-59.png",
+    "handle": "caterly-rocks",
+    "title": "Casterly Rock",
+    "source_img": "https://cdn.shopify.com/s/files/1/0742/9105/2850/files/casterly-ByArome.png?v=1757602040",
+    "confidence": "high"
+  },
+  "arome-collection-1-64": {
+    "img": "/img/a-arome-collection-1-64.png",
+    "handle": "rumelia",
+    "title": "Rumelia",
+    "source_img": "https://cdn.shopify.com/s/files/1/0742/9105/2850/files/Rumelia-Camera.png?v=1756196314",
+    "confidence": "high"
+  },
+  "arome-collection-1-65": {
+    "img": "/img/a-arome-collection-1-65.png",
+    "handle": "frosted-lust",
+    "title": "Frosted Lust",
+    "source_img": "https://cdn.shopify.com/s/files/1/0742/9105/2850/files/FrostedLust-Camera.png?v=1750600405",
+    "confidence": "high"
+  },
+  "arome-collection-1-66": {
+    "img": "/img/a-arome-collection-1-66.png",
+    "handle": "beguile",
+    "title": "Beguile",
+    "source_img": "https://cdn.shopify.com/s/files/1/0742/9105/2850/files/Beguile-Camera.png?v=1773314606",
+    "confidence": "high"
+  },
+  "arome-collection-1-67": {
+    "img": "/img/a-arome-collection-1-67.png",
+    "handle": "wanted-1",
+    "title": "Wanted",
+    "source_img": "https://cdn.shopify.com/s/files/1/0742/9105/2850/files/Wanted-Camera.png?v=1750602773",
+    "confidence": "high"
+  },
+  "arome-collection-1-68": {
+    "img": "/img/a-arome-collection-1-68.png",
+    "handle": "sugary-blue",
+    "title": "Sugary Blue",
+    "source_img": "https://cdn.shopify.com/s/files/1/0742/9105/2850/files/sugaryblue-ByArome.png?v=1752072970",
+    "confidence": "med"
+  },
+  "arome-collection-1-69": {
+    "img": "/img/a-arome-collection-1-69.png",
+    "handle": "verde-aqua",
+    "title": "Verde Aqua",
+    "source_img": "https://cdn.shopify.com/s/files/1/0742/9105/2850/files/verdeAqua-ByArome.png?v=1751032507",
+    "confidence": "high"
+  },
+  "arome-collection-1-70": {
+    "img": "/img/a-arome-collection-1-70.png",
+    "handle": "bigg-apple",
+    "title": "Bigg Apple",
+    "source_img": "https://cdn.shopify.com/s/files/1/0742/9105/2850/files/BiggApple-Camera.png?v=1770559713",
+    "confidence": "med"
+  },
+  "arome-collection-1-71": {
+    "img": "/img/a-arome-collection-1-71.png",
+    "handle": "diplomat",
+    "title": "Diplomat",
+    "source_img": "https://cdn.shopify.com/s/files/1/0742/9105/2850/files/Diplomat-Camera.png?v=1750599884",
+    "confidence": "high"
+  },
+  "arome-collection-1-73": {
+    "img": "/img/a-arome-collection-1-73.png",
+    "handle": "le-printemps",
+    "title": "Le Printemps",
+    "source_img": "https://cdn.shopify.com/s/files/1/0742/9105/2850/files/LePrintemps-Camera.png?v=1750602145",
+    "confidence": "high"
+  },
+  "arome-collection-1-74": {
+    "img": "/img/a-arome-collection-1-74.png",
+    "handle": "oligarch-extreme",
+    "title": "Oligarch",
+    "source_img": "https://cdn.shopify.com/s/files/1/0742/9105/2850/files/oligarch-Camera.png?v=1754058518",
+    "confidence": "high"
+  },
+  "arome-collection-2-1": {
+    "img": "/img/a-arome-collection-2-1.png",
+    "handle": "paradiso",
+    "title": "Paradiso",
+    "source_img": "https://cdn.shopify.com/s/files/1/0742/9105/2850/files/Paradiso-ByArome_c332602e-6d63-444a-afee-bcc47ebc8b7d.png?v=1750602383",
+    "confidence": "high"
+  },
+  "arome-collection-2-2": {
+    "img": "/img/a-arome-collection-2-2.png",
+    "handle": "frosted-lust",
+    "title": "Frosted Lust",
+    "source_img": "https://cdn.shopify.com/s/files/1/0742/9105/2850/files/FrostedLust-Camera.png?v=1750600405",
+    "confidence": "high"
+  },
+  "arome-collection-2-3": {
+    "img": "/img/a-arome-collection-2-3.png",
+    "handle": "son-of-sea",
+    "title": "Son of Sea",
+    "source_img": "https://cdn.shopify.com/s/files/1/0742/9105/2850/files/SonofSea-Camera.png?v=1750602604",
+    "confidence": "high"
+  },
+  "arome-collection-2-4": {
+    "img": "/img/a-arome-collection-2-4.png",
+    "handle": "codeblack",
+    "title": "Code Black",
+    "source_img": "https://cdn.shopify.com/s/files/1/0742/9105/2850/files/CodeBlack-ByArome.png?v=1776003656",
+    "confidence": "high"
+  },
+  "arome-collection-2-5": {
+    "img": "/img/a-arome-collection-2-5.png",
+    "handle": "apple-splash",
+    "title": "Apple Splash",
+    "source_img": "https://cdn.shopify.com/s/files/1/0742/9105/2850/files/AppleSplash-Camera.png?v=1750599269",
+    "confidence": "high"
+  },
+  "arome-collection-2-6": {
+    "img": "/img/a-arome-collection-2-6.png",
+    "handle": "summer-wine-iced",
+    "title": "Intoxicated",
+    "source_img": "https://cdn.shopify.com/s/files/1/0742/9105/2850/files/Intoxicated-Camera.png?v=1750601863",
+    "confidence": "high"
+  },
+  "arome-collection-2-7": {
+    "img": "/img/a-arome-collection-2-7.png",
+    "handle": "khamar-on-ice",
+    "title": "Khamar on Ice",
+    "source_img": "https://cdn.shopify.com/s/files/1/0742/9105/2850/files/KhamronIce-Camera.png?v=1767276106",
+    "confidence": "high"
+  },
+  "arome-collection-2-8": {
+    "img": "/img/a-arome-collection-2-8.png",
+    "handle": "bleu-elixir",
+    "title": "Bleu Absolu",
+    "source_img": "https://cdn.shopify.com/s/files/1/0742/9105/2850/files/BleuAbsolu-Camera.png?v=1750599517",
+    "confidence": "high"
+  },
+  "arome-collection-2-10": {
+    "img": "/img/a-arome-collection-2-10.png",
+    "handle": "sugary-blue",
+    "title": "Sugary Blue",
+    "source_img": "https://cdn.shopify.com/s/files/1/0742/9105/2850/files/sugaryblue-ByArome.png?v=1752072970",
+    "confidence": "med"
+  },
+  "arome-collection-2-11": {
+    "img": "/img/a-arome-collection-2-11.png",
+    "handle": "ferox",
+    "title": "Ferox",
+    "source_img": "https://cdn.shopify.com/s/files/1/0742/9105/2850/files/ferox-Camera.png?v=1754058416",
+    "confidence": "high"
+  },
+  "arome-collection-2-12": {
+    "img": "/img/a-arome-collection-2-12.png",
+    "handle": "sabre",
+    "title": "Sabre",
+    "source_img": "https://cdn.shopify.com/s/files/1/0742/9105/2850/files/Sabre-Camera.png?v=1773314309",
+    "confidence": "high"
+  },
+  "arome-collection-2-13": {
+    "img": "/img/a-arome-collection-2-13.png",
+    "handle": "green-mist",
+    "title": "Green Mist",
+    "source_img": "https://cdn.shopify.com/s/files/1/0742/9105/2850/files/GreenMist-Camera.png?v=1773314327",
+    "confidence": "high"
+  },
+  "arome-collection-2-14": {
+    "img": "/img/a-arome-collection-2-14.png",
+    "handle": "une",
+    "title": "Une",
+    "source_img": "https://cdn.shopify.com/s/files/1/0742/9105/2850/files/Une-ByArome.png?v=1776010201",
+    "confidence": "high"
+  },
+  "arome-collection-2-15": {
+    "img": "/img/a-arome-collection-2-15.png",
+    "handle": "chrome",
+    "title": "Chrome",
+    "source_img": "https://cdn.shopify.com/s/files/1/0742/9105/2850/files/Chrome-ByArome_6076149a-74e3-4812-a525-056d063ba116.png?v=1750599673",
+    "confidence": "high"
+  },
+  "arome-collection-2-17": {
+    "img": "/img/a-arome-collection-2-17.png",
+    "handle": "azure",
+    "title": "Azure",
+    "source_img": "https://cdn.shopify.com/s/files/1/0742/9105/2850/files/azure-ByArome.png?v=1776009113",
+    "confidence": "high"
+  },
+  "arome-collection-2-18": {
+    "img": "/img/a-arome-collection-2-18.png",
+    "handle": "glacial-breeze",
+    "title": "Glacial Breeze",
+    "source_img": "https://cdn.shopify.com/s/files/1/0742/9105/2850/files/GlacialBreeze-ByArome.png?v=1776008973",
+    "confidence": "high"
+  },
+  "arome-collection-2-19": {
+    "img": "/img/a-arome-collection-2-19.png",
+    "handle": "yagami",
+    "title": "Yagami",
+    "source_img": "https://cdn.shopify.com/s/files/1/0742/9105/2850/files/Yagami-ByArome.png?v=1776009442",
+    "confidence": "high"
+  },
+  "arome-collection-2-20": {
+    "img": "/img/a-arome-collection-2-20.png",
+    "handle": "iris-blanc",
+    "title": "Iris Blanc",
+    "source_img": "https://cdn.shopify.com/s/files/1/0742/9105/2850/files/IrisBlanc-Camera.png?v=1767277279",
+    "confidence": "high"
+  },
+  "arome-collection-2-21": {
+    "img": "/img/a-arome-collection-2-21.png",
+    "handle": "vorstel",
+    "title": "Vorstel 2.0",
+    "source_img": "https://cdn.shopify.com/s/files/1/0742/9105/2850/files/Vorstel-Camera_ebaf5323-9f91-47c6-8715-34d96a4aef7d.png?v=1759327527",
+    "confidence": "med"
+  },
+  "arome-collection-2-22": {
+    "img": "/img/a-arome-collection-2-22.png",
+    "handle": "verdure",
+    "title": "Verdure",
+    "source_img": "https://cdn.shopify.com/s/files/1/0742/9105/2850/files/Verdure-Camera.png?v=1750602758",
+    "confidence": "high"
+  },
+  "arome-collection-2-23": {
+    "img": "/img/a-arome-collection-2-23.png",
+    "handle": "jade",
+    "title": "Jade",
+    "source_img": "https://cdn.shopify.com/s/files/1/0742/9105/2850/files/Jade-Camera.png?v=1750602057",
+    "confidence": "high"
+  },
+  "arome-collection-2-24": {
+    "img": "/img/a-arome-collection-2-24.png",
+    "handle": "emerald",
+    "title": "Emerald",
+    "source_img": "https://cdn.shopify.com/s/files/1/0742/9105/2850/files/Emerald-Camera.png?v=1750599949",
+    "confidence": "high"
+  },
+  "arome-collection-2-25": {
+    "img": "/img/a-arome-collection-2-25.png",
+    "handle": "vorstel",
+    "title": "Vorstel 2.0",
+    "source_img": "https://cdn.shopify.com/s/files/1/0742/9105/2850/files/Vorstel-Camera_ebaf5323-9f91-47c6-8715-34d96a4aef7d.png?v=1759327527",
+    "confidence": "med"
+  },
+  "arome-collection-2-26": {
+    "img": "/img/a-arome-collection-2-26.png",
+    "handle": "ferox",
+    "title": "Ferox",
+    "source_img": "https://cdn.shopify.com/s/files/1/0742/9105/2850/files/ferox-Camera.png?v=1754058416",
+    "confidence": "high"
+  },
+  "arome-collection-2-28": {
+    "img": "/img/a-arome-collection-2-28.png",
+    "handle": "celestic",
+    "title": "Celestic",
+    "source_img": "https://cdn.shopify.com/s/files/1/0742/9105/2850/files/Celestic-Camera.png?v=1750599596",
+    "confidence": "high"
+  },
+  "arome-collection-2-30": {
+    "img": "/img/a-arome-collection-2-30.png",
+    "handle": "agarwood",
+    "title": "Agarwood",
+    "source_img": "https://cdn.shopify.com/s/files/1/0742/9105/2850/files/agarwood-Camera.png?v=1754832330",
+    "confidence": "high"
+  },
+  "arome-collection-2-32": {
+    "img": "/img/a-arome-collection-2-32.png",
+    "handle": "black-reign",
+    "title": "Black Reign",
+    "source_img": "https://cdn.shopify.com/s/files/1/0742/9105/2850/files/blackreign-Camera.png?v=1760102298",
+    "confidence": "high"
+  },
+  "arome-collection-2-33": {
+    "img": "/img/a-arome-collection-2-33.png",
+    "handle": "boss-elixir",
+    "title": "Boss Elixir",
+    "source_img": "https://cdn.shopify.com/s/files/1/0742/9105/2850/files/Bosselixir-Camera.png?v=1767278032",
+    "confidence": "high"
+  },
+  "arome-collection-2-34": {
+    "img": "/img/a-arome-collection-2-34.png",
+    "handle": "stronger-with-you",
+    "title": "Intensely",
+    "source_img": "https://cdn.shopify.com/s/files/1/0742/9105/2850/files/Intensely-Camera.png?v=1750601844",
+    "confidence": "high"
+  },
+  "arome-collection-2-35": {
+    "img": "/img/a-arome-collection-2-35.png",
+    "handle": "zephyr",
+    "title": "Zephyr",
+    "source_img": "https://cdn.shopify.com/s/files/1/0742/9105/2850/files/Zypher-Camera.png?v=1750602813",
+    "confidence": "high"
+  },
+  "arome-collection-2-36": {
+    "img": "/img/a-arome-collection-2-36.png",
+    "handle": "irish",
+    "title": "Irish Water",
+    "source_img": "https://cdn.shopify.com/s/files/1/0742/9105/2850/files/IrishWaters-ByArome_0b90559c-4d28-4227-a44c-8deb9b6d0c93.png?v=1750601925",
+    "confidence": "high"
+  },
+  "arome-collection-2-37": {
+    "img": "/img/a-arome-collection-2-37.png",
+    "handle": "harmonia",
+    "title": "Harmonia",
+    "source_img": "https://cdn.shopify.com/s/files/1/0742/9105/2850/files/Harmonia-Camera_72249de4-0253-4a0e-9daa-c2f99a645fc8.png?v=1750601811",
+    "confidence": "high"
+  }
+}

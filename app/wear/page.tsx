@@ -5,7 +5,7 @@ import { SiteFooter, SiteHeader } from "@/components/SiteHeader";
 
 export const metadata: Metadata = {
   title: "What should I wear? · The Vault",
-  description: "Pick a season, occasion and time — get matching fragrances from the collection.",
+  description: "Pick a season, occasion and time to get matching fragrances from the collection.",
 };
 
 export default function WearPage() {
@@ -22,8 +22,8 @@ export default function WearPage() {
             What should I wear today?
           </h1>
           <p className="mt-4 max-w-xl text-lg text-ink-2">
-            Tell me the weather and the moment. I&apos;ll rank the collection by what fits —
-            strongest matches first.
+            Tell me the weather and the moment. I&apos;ll rank the collection by what fits,
+            strongest first.
           </p>
         </section>
         <WearClient collection={collection} facets={facets} />

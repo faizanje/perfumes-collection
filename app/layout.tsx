@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Fraunces, Inter, IBM_Plex_Mono } from "next/font/google";
 import { UserMetaProvider } from "@/lib/userMeta";
+import { BottlePrefProvider } from "@/lib/bottlePref";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -26,7 +27,7 @@ const plex = IBM_Plex_Mono({
 export const metadata: Metadata = {
   title: "The Vault · A Personal Fragrance Collection",
   description:
-    "A curated, searchable archive of 313 fragrances — notes, families, seasons, occasions and layering, all in one place.",
+    "A searchable archive of 313 fragrances, with notes, families, seasons, occasions and layering.",
   manifest: "/manifest.webmanifest",
   appleWebApp: { capable: true, statusBarStyle: "black-translucent", title: "The Vault" },
   openGraph: {
@@ -60,7 +61,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body>
-        <UserMetaProvider>{children}</UserMetaProvider>
+        <UserMetaProvider>
+          <BottlePrefProvider>{children}</BottlePrefProvider>
+        </UserMetaProvider>
       </body>
     </html>
   );

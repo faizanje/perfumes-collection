@@ -2,11 +2,12 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
-import { Search, Heart, SlidersHorizontal } from "lucide-react";
+import { Search, Heart, SlidersHorizontal, ChevronsDownUp, ChevronsUpDown } from "lucide-react";
 import type { Facets, Perfume } from "@/lib/types";
 import { EMPTY_FILTER, applyFilters, type FilterState } from "@/lib/filter";
 import { GROUP_BY_LABELS, groupPerfumes, type GroupBy } from "@/lib/group";
 import { useUserMeta } from "@/lib/userMeta";
+import { useBottlePref, type BottleMode } from "@/lib/bottlePref";
 import { PerfumeCard } from "./PerfumeCard";
 import { PerfumeDetail } from "./PerfumeDetail";
 import { GroupSection } from "./GroupSection";
@@ -33,7 +34,19 @@ export function GalleryClient({
   const [sheetOpen, setSheetOpen] = useState(false);
   const [view, setView] = useState<ViewMode>("grouped");
   const [groupBy, setGroupBy] = useState<GroupBy>("collection");
+  // collapse/expand all groups: defaultOpen flips, signal forces a reset in every section
+  const [allOpen, setAllOpen] = useState(true);
+  const [collapseSignal, setCollapseSignal] = useState(0);
+  const toggleAll = () => {
+    setAllOpen((o) => !o);
+    setCollapseSignal((s) => s + 1);
+  };
   const { favorites, favoriteCount, ready } = useUserMeta();
+  const { mode: bottleMode, setMode: setBottleMode } = useBottlePref();
+  const hasHouseBottles = useMemo(
+    () => collection.some((p) => p.profile.houseBottle),
+    [collection]
+  );
 
   const results = useMemo(
     () => applyFilters(collection, filter, favorites),
@@ -77,6 +90,27 @@ export function GalleryClient({
             ))}
           </div>
 
+          {/* default bottle photo (only when the collection has real house bottles) */}
+          {hasHouseBottles && (
+            <div className="order-5 inline-flex items-center gap-1.5 sm:order-2">
+              <span className="label hidden md:inline">Bottle</span>
+              <div className="inline-flex rounded-full border border-line bg-surface p-0.5" role="group" aria-label="Default bottle photo">
+                {([["original", "Original"], ["house", "Owned"]] as [BottleMode, string][]).map(([v, l]) => (
+                  <button
+                    key={v}
+                    onClick={() => setBottleMode(v)}
+                    aria-pressed={bottleMode === v}
+                    className={`rounded-full px-3 py-1.5 text-sm transition-colors ${
+                      bottleMode === v ? "bg-ink text-canvas" : "text-ink-2 hover:text-ink"
+                    }`}
+                  >
+                    {l}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
           {/* group-by (only meaningful in grouped view) */}
           {view === "grouped" && (
             <label className="order-4 hidden items-center gap-1.5 sm:flex">
@@ -91,6 +125,17 @@ export function GalleryClient({
                 ))}
               </select>
             </label>
+          )}
+
+          {view === "grouped" && (
+            <button
+              onClick={toggleAll}
+              className="order-4 hidden items-center gap-1.5 rounded-full border border-line px-3 py-1.5 text-sm text-ink-2 transition-colors hover:border-ink-3 hover:text-ink sm:inline-flex"
+              title={allOpen ? "Collapse all groups" : "Expand all groups"}
+            >
+              {allOpen ? <ChevronsDownUp size={15} strokeWidth={1.8} /> : <ChevronsUpDown size={15} strokeWidth={1.8} />}
+              {allOpen ? "Collapse" : "Expand"}
+            </button>
           )}
 
           {/* sort (gallery view) */}
@@ -132,7 +177,7 @@ export function GalleryClient({
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-[14rem_minmax(0,1fr)]">
         {/* desktop rail */}
         <aside className="hidden lg:block">
-          <div className="sticky top-[5.25rem]">
+          <div className="sticky top-[5.25rem] max-h-[calc(100vh-6.5rem)] overflow-y-auto pr-2">
             <Filters facets={facets} filter={filter} setFilter={setFilter} resultCount={results.length} />
           </div>
         </aside>
@@ -144,7 +189,7 @@ export function GalleryClient({
           ) : view === "grouped" ? (
             <div>
               {groups.map((g) => (
-                <GroupSection key={g.key} group={g} onOpen={setSelected} />
+                <GroupSection key={g.key} group={g} onOpen={setSelected} defaultOpen={allOpen} resetSignal={collapseSignal} />
               ))}
             </div>
           ) : (
@@ -200,10 +245,9 @@ export function GalleryClient({
 function EmptyState({ onReset }: { onReset: () => void }) {
   return (
     <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-line py-24 text-center">
-      <p className="font-display text-2xl text-ink">Nothing matches — yet</p>
+      <p className="font-display text-2xl text-ink">Nothing matches yet</p>
       <p className="mt-2 max-w-sm text-sm text-ink-3">
-        Try loosening a filter or clearing your search. Your collection is broad; the right
-        scent is in here somewhere.
+        Try loosening a filter or clearing your search.
       </p>
       <button
         onClick={onReset}

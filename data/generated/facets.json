@@ -3,19 +3,19 @@
   "families": [
     [
       "Fresh / Citrus",
-      99
+      105
     ],
     [
       "Amber / Oriental",
-      50
+      49
     ],
     [
       "Woody",
-      44
+      45
     ],
     [
       "Aromatic / Fresh",
-      42
+      41
     ],
     [
       "Fruity",
@@ -31,7 +31,7 @@
     ],
     [
       "Floral",
-      14
+      9
     ],
     [
       "Leather / Smoky",
@@ -52,7 +52,7 @@
       14
     ],
     [
-      "Twisty Sense",
+      "Twisty Scents",
       10
     ],
     [
@@ -149,11 +149,9 @@
     ]
   ],
   "groups": [
-    "AROME — COLLECTION 1",
-    "AROME — COLLECTION 2",
-    "SCENT IT — COLLECTION 1",
-    "SCENT IT — COLLECTION 2",
-    "TWISTY SENSE",
+    "AROME",
+    "SCENT IT",
+    "TWISTY SCENTS",
     "SESKY",
     "NIOI SENTIRBON",
     "ENCHANTE",
@@ -171,7 +169,7 @@
   "seasons": [
     [
       "spring",
-      243
+      242
     ],
     [
       "fall",
@@ -179,7 +177,7 @@
     ],
     [
       "summer",
-      215
+      216
     ],
     [
       "winter",
@@ -189,35 +187,35 @@
   "occasions": [
     [
       "Daily",
-      283
+      285
     ],
     [
       "Office",
-      283
+      285
     ],
     [
       "Casual",
-      283
+      285
     ],
     [
       "Evening",
-      277
+      280
     ],
     [
       "Date night",
-      277
+      280
     ],
     [
       "Versatile",
-      247
+      252
     ],
     [
       "Night out",
-      197
+      203
     ],
     [
       "Special occasion",
-      197
+      203
     ]
   ]
 }

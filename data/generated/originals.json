@@ -172,60 +172,64 @@
     "matchedName": "Roja Dove Elysium Pour Femme",
     "brand": "Roja Dove",
     "year": "2024",
-    "gender": "female",
-    "rating": 3.88,
-    "family": "Floral",
+    "gender": "women",
+    "rating": null,
+    "family": "Fresh / Citrus",
     "keyAccords": [
-      "floral",
-      "powdery",
-      "fruity",
-      "white floral",
       "citrus",
+      "aromatic",
       "woody",
-      "fresh",
-      "sweet",
-      "musky"
+      "fresh spicy",
+      "amber",
+      "green",
+      "fruity",
+      "earthy",
+      "animalic"
     ],
     "topNotes": [
-      "Peach",
-      "Blackberry",
+      "Grapefruit",
+      "Lemon",
       "Bergamot",
-      "Mandarin Orange"
+      "Lime",
+      "Thyme",
+      "Artemisia",
+      "Galbanum"
     ],
     "heartNotes": [
-      "Freesia",
-      "Magnolia",
-      "Jasmine",
+      "Vetiver",
+      "Juniper Berries",
+      "Black Currant",
+      "Apple",
+      "Cedar",
+      "Pink Pepper",
+      "Cypriol Oil or Nagarmotha",
       "Lily-of-the-Valley",
-      "Ylang-Ylang",
-      "Peony",
-      "Cyclamen",
-      "Violet",
-      "Geranium"
+      "Jasmine",
+      "Rose"
     ],
     "baseNotes": [
-      "Musk",
-      "Sandalwood",
-      "Cedarwood",
-      "Pink Pepper",
-      "Vanilla"
+      "Ambergris",
+      "Leather",
+      "Vanilla",
+      "Benzoin",
+      "Labdanum"
     ],
     "seasons": [
       {
-        "season": "spring",
+        "season": "summer",
         "strength": 1.0
       },
       {
-        "season": "summer",
-        "strength": 0.93
+        "season": "spring",
+        "strength": 0.91
       },
       {
         "season": "fall",
-        "strength": 0.33
+        "strength": 0.43
       },
       {
         "season": "winter",
-        "strength": 0.26
+        "strength": 0.15
       }
     ],
     "occasions": [
@@ -234,7 +238,9 @@
       "Casual",
       "Versatile",
       "Evening",
-      "Date night"
+      "Date night",
+      "Night out",
+      "Special occasion"
     ],
     "timeOfDay": [
       "Day"
@@ -242,26 +248,26 @@
     "longevity": null,
     "sillage": null,
     "mood": "A floral, citrusy and woody composition.",
-    "originalUrl": "https://www.fragrantica.com/perfume/roja-dove/elysium-pour-femme-90214.html",
-    "imageUrl": "https://fimgs.net/mdimg/perfume-thumbs/375x500.90214.jpg",
+    "originalUrl": "https://www.fragrantica.com/perfume/Roja-Dove/Elysium-Pour-Homme-Parfum-Cologne-46296.html",
+    "imageUrl": null,
     "confidence": "high",
     "verified": true,
     "source": "fragrantica",
     "matchScore": 0.845,
     "accordWeights": {
-      "floral": 100,
-      "powdery": 58.6,
-      "fruity": 57.8,
-      "white floral": 57.1,
-      "citrus": 57.0,
-      "woody": 56.1,
-      "fresh": 55.0,
-      "sweet": 51.6,
-      "musky": 51.2
+      "citrus": 100,
+      "aromatic": 91,
+      "woody": 75,
+      "fresh spicy": 65,
+      "amber": 53,
+      "green": 53,
+      "fruity": 51,
+      "earthy": 47,
+      "animalic": 44
     },
     "dayNight": {
       "day": 1.0,
-      "night": 0.28
+      "night": 0.48
     },
     "needsReview": false
   },
@@ -14968,16 +14974,40 @@
     "year": null,
     "gender": "men",
     "rating": null,
-    "family": "Aromatic / Fresh",
+    "family": "Fresh / Citrus",
     "keyAccords": [
-      "aromatic",
-      "fresh",
       "citrus",
-      "woody"
+      "woody",
+      "aromatic",
+      "fresh spicy",
+      "musky",
+      "amber",
+      "powdery",
+      "green",
+      "warm spicy",
+      "balsamic"
     ],
-    "topNotes": [],
-    "heartNotes": [],
-    "baseNotes": [],
+    "topNotes": [
+      "Grapefruit",
+      "Lemon",
+      "Mint",
+      "Pink Pepper"
+    ],
+    "heartNotes": [
+      "Iso E Super",
+      "Jasmine",
+      "Ginger",
+      "Nutmeg"
+    ],
+    "baseNotes": [
+      "Sandalwood",
+      "Patchouli",
+      "Cedarwood",
+      "White Musk",
+      "Labdanum",
+      "Vetiver",
+      "Incense"
+    ],
     "seasons": [
       {
         "season": "summer",
@@ -14986,12 +15016,25 @@
       {
         "season": "spring",
         "strength": 0.75
+      },
+      {
+        "season": "fall",
+        "strength": 0.47
+      },
+      {
+        "season": "winter",
+        "strength": 0.18
       }
     ],
     "occasions": [
       "Daily",
       "Office",
-      "Casual"
+      "Casual",
+      "Versatile",
+      "Evening",
+      "Date night",
+      "Night out",
+      "Special occasion"
     ],
     "timeOfDay": [
       "Day"
@@ -14999,12 +15042,28 @@
     "longevity": null,
     "sillage": null,
     "mood": "A aromatic, fresh and citrusy composition.",
-    "confidence": "low",
-    "verified": false,
-    "needsReview": true,
-    "originalUrl": null,
-    "source": "manual",
-    "matchScore": null
+    "confidence": "high",
+    "verified": true,
+    "needsReview": false,
+    "originalUrl": "https://www.fragrantica.com/perfume/Ahmed-Al-Maghribi/Blue-by-Ahmed-104882.html",
+    "source": "fragrantica",
+    "matchScore": null,
+    "accordWeights": {
+      "citrus": 100,
+      "woody": 99,
+      "aromatic": 69,
+      "fresh spicy": 61,
+      "musky": 61,
+      "amber": 57,
+      "powdery": 53,
+      "green": 50,
+      "warm spicy": 50,
+      "balsamic": 45
+    },
+    "dayNight": {
+      "day": 1.0,
+      "night": 0.45
+    }
   },
   "victorioso": {
     "slug": "victorioso",
@@ -17149,23 +17208,35 @@
     "rating": null,
     "family": "Fresh / Citrus",
     "keyAccords": [
-      "fresh",
-      "aquatic",
+      "citrus",
+      "marine",
+      "aromatic",
+      "salty",
       "white floral",
-      "musky"
+      "sweet",
+      "woody",
+      "fresh spicy",
+      "musky",
+      "powdery"
     ],
     "topNotes": [
-      "Bergamot",
-      "Coconut Water"
+      "Lemon",
+      "Orange",
+      "Tangerine",
+      "Ginger",
+      "Pepper"
     ],
     "heartNotes": [
-      "Neroli",
-      "Orange Blossom"
+      "Sea Notes",
+      "Tiare Flower",
+      "Pine Tree",
+      "Mimosa",
+      "Vetiver"
     ],
     "baseNotes": [
-      "Musk",
-      "Cedar",
-      "Salty Notes"
+      "Sea Salt",
+      "White Musk",
+      "Amber"
     ],
     "seasons": [
       {
@@ -17174,13 +17245,24 @@
       },
       {
         "season": "spring",
-        "strength": 0.62
+        "strength": 0.57
+      },
+      {
+        "season": "fall",
+        "strength": 0.12
+      },
+      {
+        "season": "winter",
+        "strength": 0.04
       }
     ],
     "occasions": [
       "Daily",
       "Office",
-      "Casual"
+      "Casual",
+      "Versatile",
+      "Evening",
+      "Date night"
     ],
     "timeOfDay": [
       "Day"
@@ -17189,11 +17271,27 @@
     "sillage": null,
     "mood": "A fresh, aquatic and white-floral composition.",
     "confidence": "high",
-    "verified": false,
+    "verified": true,
     "needsReview": false,
-    "originalUrl": null,
-    "source": "manual",
-    "matchScore": null
+    "originalUrl": "https://www.fragrantica.com/perfume/Mancera/French-Riviera-74636.html",
+    "source": "fragrantica",
+    "matchScore": null,
+    "accordWeights": {
+      "citrus": 100,
+      "marine": 85,
+      "aromatic": 79,
+      "salty": 72,
+      "white floral": 59,
+      "sweet": 56,
+      "woody": 50,
+      "fresh spicy": 49,
+      "musky": 49,
+      "powdery": 48
+    },
+    "dayNight": {
+      "day": 1.0,
+      "night": 0.18
+    }
   },
   "wu-long-cha": {
     "slug": "wu-long-cha",
@@ -17454,50 +17552,90 @@
     "family": "Leather / Smoky",
     "keyAccords": [
       "tobacco",
-      "sweet",
+      "warm spicy",
+      "citrus",
+      "oud",
       "woody",
-      "warm spicy"
+      "sweet",
+      "fresh spicy",
+      "aromatic",
+      "leather",
+      "soft spicy"
     ],
     "topNotes": [
-      "Tobacco",
-      "Bergamot"
+      "Bergamot",
+      "Pink Pepper",
+      "Red Chilli Pepper",
+      "Lavender"
     ],
     "heartNotes": [
-      "Cinnamon",
-      "Tonka"
+      "Tobacco",
+      "Oud",
+      "Cedarwood",
+      "Cherry"
     ],
     "baseNotes": [
-      "Vanilla",
-      "Woods"
+      "Leather",
+      "Patchouli",
+      "Vetiver"
     ],
     "seasons": [
       {
-        "season": "fall",
+        "season": "winter",
         "strength": 1.0
       },
       {
-        "season": "winter",
-        "strength": 0.95
+        "season": "spring",
+        "strength": 0.98
+      },
+      {
+        "season": "fall",
+        "strength": 0.87
+      },
+      {
+        "season": "summer",
+        "strength": 0.62
       }
     ],
     "occasions": [
+      "Daily",
+      "Office",
+      "Casual",
+      "Versatile",
       "Evening",
       "Date night",
       "Night out",
       "Special occasion"
     ],
     "timeOfDay": [
+      "Day",
       "Night"
     ],
     "longevity": null,
     "sillage": null,
     "mood": "A tobacco-laced, sweet and woody composition.",
-    "confidence": "low",
-    "verified": false,
-    "needsReview": true,
-    "originalUrl": null,
-    "source": "manual",
-    "matchScore": null
+    "confidence": "high",
+    "verified": true,
+    "needsReview": false,
+    "originalUrl": "https://www.fragrantica.com/perfume/Ibraheem-AlQurashi/Brazilian-Tobacco-100562.html",
+    "source": "fragrantica",
+    "matchScore": null,
+    "accordWeights": {
+      "tobacco": 100,
+      "warm spicy": 89,
+      "citrus": 88,
+      "oud": 88,
+      "woody": 83,
+      "sweet": 82,
+      "fresh spicy": 80,
+      "aromatic": 72,
+      "leather": 69,
+      "soft spicy": 67
+    },
+    "dayNight": {
+      "day": 0.8,
+      "night": 1.0
+    }
   },
   "play-it-cool-by-cr7": {
     "slug": "play-it-cool-by-cr7",
@@ -18381,16 +18519,35 @@
     "year": null,
     "gender": "men",
     "rating": null,
-    "family": "Amber / Oriental",
+    "family": "Woody",
     "keyAccords": [
-      "amber",
       "woody",
       "oud",
-      "warm spicy"
+      "amber",
+      "fruity",
+      "citrus",
+      "leather",
+      "fresh spicy",
+      "animalic",
+      "warm spicy",
+      "soft spicy"
     ],
-    "topNotes": [],
-    "heartNotes": [],
-    "baseNotes": [],
+    "topNotes": [
+      "Mandarin Orange",
+      "Black Currant",
+      "Pink Pepper"
+    ],
+    "heartNotes": [
+      "Frankincense",
+      "Amber"
+    ],
+    "baseNotes": [
+      "Agarwood (Oud)",
+      "Leather",
+      "Oak",
+      "Sandalwood",
+      "Patchouli"
+    ],
     "seasons": [
       {
         "season": "winter",
@@ -18398,10 +18555,22 @@
       },
       {
         "season": "fall",
-        "strength": 0.73
+        "strength": 0.91
+      },
+      {
+        "season": "spring",
+        "strength": 0.57
+      },
+      {
+        "season": "summer",
+        "strength": 0.32
       }
     ],
     "occasions": [
+      "Daily",
+      "Office",
+      "Casual",
+      "Versatile",
       "Evening",
       "Date night",
       "Night out",
@@ -18413,12 +18582,28 @@
     "longevity": null,
     "sillage": null,
     "mood": "A ambery, woody and oud-rich composition.",
-    "confidence": "low",
-    "verified": false,
-    "needsReview": true,
-    "originalUrl": null,
-    "source": "manual",
-    "matchScore": null
+    "confidence": "high",
+    "verified": true,
+    "needsReview": false,
+    "originalUrl": "https://www.fragrantica.com/perfume/Amouage/Opus-XV-King-Blue-83394.html",
+    "source": "fragrantica",
+    "matchScore": null,
+    "accordWeights": {
+      "woody": 100,
+      "oud": 92,
+      "amber": 75,
+      "fruity": 74,
+      "citrus": 68,
+      "leather": 67,
+      "fresh spicy": 59,
+      "animalic": 58,
+      "warm spicy": 55,
+      "soft spicy": 53
+    },
+    "dayNight": {
+      "day": 0.59,
+      "night": 1.0
+    }
   },
   "original-blend-coffee-notes": {
     "slug": "original-blend-coffee-notes",
@@ -19564,23 +19749,32 @@
     "rating": null,
     "family": "Fresh / Citrus",
     "keyAccords": [
-      "aquatic",
-      "fresh",
       "citrus",
-      "aromatic"
+      "fresh",
+      "aromatic",
+      "fresh spicy",
+      "woody",
+      "aquatic",
+      "marine",
+      "lavender",
+      "amber",
+      "musky"
     ],
     "topNotes": [
-      "Sea Notes",
+      "Cascalone",
+      "Aquozone",
       "Bergamot",
-      "Mint"
+      "Mandarin"
     ],
     "heartNotes": [
       "Lavender",
-      "Geranium"
+      "Cypress",
+      "Rosemary"
     ],
     "baseNotes": [
+      "Amber",
       "Musk",
-      "Amber"
+      "Patchouli"
     ],
     "seasons": [
       {
@@ -19589,13 +19783,24 @@
       },
       {
         "season": "spring",
-        "strength": 0.61
+        "strength": 0.59
+      },
+      {
+        "season": "fall",
+        "strength": 0.28
+      },
+      {
+        "season": "winter",
+        "strength": 0.12
       }
     ],
     "occasions": [
       "Daily",
       "Office",
-      "Casual"
+      "Casual",
+      "Versatile",
+      "Evening",
+      "Date night"
     ],
     "timeOfDay": [
       "Day"
@@ -19603,12 +19808,28 @@
     "longevity": null,
     "sillage": null,
     "mood": "A aquatic, fresh and citrusy composition.",
-    "confidence": "low",
-    "verified": false,
-    "needsReview": true,
-    "originalUrl": null,
-    "source": "manual",
-    "matchScore": null
+    "confidence": "high",
+    "verified": true,
+    "needsReview": false,
+    "originalUrl": "https://www.fragrantica.com/perfume/Rayhaan/Ocean-Rush-107857.html",
+    "source": "fragrantica",
+    "matchScore": null,
+    "accordWeights": {
+      "citrus": 100,
+      "fresh": 100,
+      "aromatic": 97,
+      "fresh spicy": 90,
+      "woody": 78,
+      "aquatic": 76,
+      "marine": 66,
+      "lavender": 65,
+      "amber": 63,
+      "musky": 60
+    },
+    "dayNight": {
+      "day": 1.0,
+      "night": 0.27
+    }
   },
   "euphoric-oud": {
     "slug": "euphoric-oud",

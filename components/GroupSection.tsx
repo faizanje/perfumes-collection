@@ -1,19 +1,36 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ChevronDown } from "lucide-react";
 import type { Group } from "@/lib/group";
 import type { Perfume } from "@/lib/types";
+import { houseLogo, houseLogoIsWordmark } from "@/lib/houseLogos";
 import { PerfumeCard } from "./PerfumeCard";
 
 export function GroupSection({
   group,
   onOpen,
+  defaultOpen = true,
+  resetSignal = 0,
 }: {
   group: Group;
   onOpen: (p: Perfume) => void;
+  defaultOpen?: boolean;
+  resetSignal?: number;
 }) {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(defaultOpen);
+  // when "collapse/expand all" is clicked, snap every section to the new default
+  useEffect(() => {
+    setOpen(defaultOpen);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [resetSignal]);
+
+  // a wordmark logo already spells the house name, so when both theme variants
+  // exist we drop the redundant text label and show the logo alone; a monogram
+  // mark keeps its text label beside it
+  const logo = houseLogo(group.house);
+  const hasFullLogo = Boolean(logo?.dark && logo?.light);
+  const wordmark = hasFullLogo && houseLogoIsWordmark(group.house);
 
   return (
     <section data-family={group.family} className="scroll-mt-24">
@@ -28,12 +45,25 @@ export function GroupSection({
               : "color-mix(in oklab, var(--color-surface) 86%, transparent)",
           }}
         >
-          <span
-            aria-hidden
-            className="h-3 w-3 shrink-0 rounded-full"
-            style={{ background: group.family ? "var(--fam)" : "var(--color-accent)" }}
-          />
-          <h2 className="min-w-0 flex-1 truncate text-lg leading-tight text-ink">{group.label}</h2>
+          {hasFullLogo ? (
+            <>
+              {/* wordmark logo replaces the text label; a monogram mark sits beside it */}
+              <span className={`flex h-7 shrink-0 items-center ${wordmark ? "min-w-0 flex-1" : ""}`}>
+                <img src={logo!.dark} alt={group.label} className="hidden h-7 w-auto max-w-[160px] object-contain dark:block" />
+                <img src={logo!.light} alt={group.label} className="block h-7 w-auto max-w-[160px] object-contain dark:hidden" />
+              </span>
+              {!wordmark && <h2 className="min-w-0 flex-1 truncate text-lg leading-tight text-ink">{group.label}</h2>}
+            </>
+          ) : (
+            <>
+              <span
+                aria-hidden
+                className="h-3 w-3 shrink-0 rounded-full"
+                style={{ background: group.family ? "var(--fam)" : "var(--color-accent)" }}
+              />
+              <h2 className="min-w-0 flex-1 truncate text-lg leading-tight text-ink">{group.label}</h2>
+            </>
+          )}
           <span className="tnum rounded-full bg-[color-mix(in_oklab,var(--color-ink)_10%,transparent)] px-2 py-0.5 text-xs text-ink-2">
             {group.items.length}
           </span>

@@ -50,6 +50,21 @@ def read_rows(z, sheet):
     return rows
 
 
+# House/group name fixes (typos / preferred spellings).
+NAME_FIXES = {"Twisty Sense": "Twisty Scents", "TWISTY SENSE": "TWISTY SCENTS"}
+
+
+def fix_name(s):
+    if not s:
+        return s
+    for a, b in NAME_FIXES.items():
+        s = s.replace(a, b)
+    # merge a house's numbered collections into one group, e.g.
+    # "AROME — COLLECTION 1/2" -> "AROME", "SCENT IT — COLLECTION 1/2" -> "SCENT IT"
+    s = re.sub(r"^(.*?)\s*[—-]\s*COLLECTION\s*\d+$", r"\1", s, flags=re.I).strip()
+    return s
+
+
 def slugify(s):
     s = s.lower().strip()
     s = re.sub(r"[''`]", "", s)
@@ -130,8 +145,8 @@ def main():
             "index": int(a),
             "cloneName": clone_name,
             "impressionRaw": impression_raw,
-            "house": house or group_brand,
-            "group": current_group,
+            "house": fix_name(house or group_brand),
+            "group": fix_name(current_group),
             "isOriginal": is_original,
             "kind": kind,
         }

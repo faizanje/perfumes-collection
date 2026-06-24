@@ -79,6 +79,7 @@ def merge_profiles(a, b, name):
         "confidence": "medium", "verified": False, "needsReview": False,
         "isBlend": True, "parents": [a["name"], b["name"]],
         "parentImages": [img for img in (local_image(a), local_image(b)) if img],
+        "parentLinks": [{"name": p["name"], "url": p.get("originalUrl")} for p in (a, b)],
     }
 
 

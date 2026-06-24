@@ -11,7 +11,7 @@ export const FAMILIES: Record<string, FamilyMeta> = {
   "Fresh / Citrus": {
     name: "Fresh / Citrus",
     short: "Fresh",
-    blurb: "Bright, aquatic and zesty — built for heat and daylight.",
+    blurb: "Bright, aquatic and zesty. Built for heat and daylight.",
   },
   "Aromatic / Fresh": {
     name: "Aromatic / Fresh",
@@ -21,27 +21,27 @@ export const FAMILIES: Record<string, FamilyMeta> = {
   Woody: {
     name: "Woody",
     short: "Woody",
-    blurb: "Cedar, vetiver and moss — dry, grounded and refined.",
+    blurb: "Cedar, vetiver and moss. Dry, grounded and refined.",
   },
   "Amber / Oriental": {
     name: "Amber / Oriental",
     short: "Amber",
-    blurb: "Warm resins and spice — cold-weather richness.",
+    blurb: "Warm resins and spice for cold-weather richness.",
   },
   Fruity: {
     name: "Fruity",
     short: "Fruity",
-    blurb: "Juicy and ripe — pineapple, apple and berries up top.",
+    blurb: "Juicy and ripe, with pineapple, apple and berries up top.",
   },
   "Gourmand / Sweet": {
     name: "Gourmand / Sweet",
     short: "Gourmand",
-    blurb: "Vanilla, praline and caramel — edible warmth.",
+    blurb: "Vanilla, praline and caramel. Edible warmth.",
   },
   "Oud / Animalic": {
     name: "Oud / Animalic",
     short: "Oud",
-    blurb: "Agarwood, leather and musk — opulent and intense.",
+    blurb: "Agarwood, leather and musk. Opulent and intense.",
   },
   Floral: {
     name: "Floral",
@@ -51,7 +51,7 @@ export const FAMILIES: Record<string, FamilyMeta> = {
   "Leather / Smoky": {
     name: "Leather / Smoky",
     short: "Leather",
-    blurb: "Tobacco, birch tar and smoke — dark and tactile.",
+    blurb: "Tobacco, birch tar and smoke. Dark and tactile.",
   },
 };
 

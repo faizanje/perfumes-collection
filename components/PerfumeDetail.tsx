@@ -5,8 +5,73 @@ import type { Perfume } from "@/lib/types";
 import { familyMeta } from "@/lib/families";
 import { layeringPartners } from "@/lib/layering";
 import { useUserMeta } from "@/lib/userMeta";
+import { useBottlePref, type BottleMode } from "@/lib/bottlePref";
 import { FavoriteButton } from "./FavoriteButton";
 import { AccordBars, SeasonStrip, NoteRow } from "./viz";
+
+/** Hero bottle(s): when a real house bottle exists alongside the inspired-by
+ *  original, show a large image with two captioned thumbnails to switch between
+ *  them. Otherwise falls back to the single image. */
+function HeroBottles({ perfume }: { perfume: Perfume }) {
+  const { profile } = perfume;
+  const { mode } = useBottlePref();
+  const orig = profile.imageUrl;
+  const house = profile.houseBottle?.img;
+  const hasBoth = Boolean(orig && house);
+  const [shown, setShown] = useState<BottleMode>(mode === "house" && house ? "house" : "original");
+
+  if (!orig && !house) return null;
+
+  if (!hasBoth) {
+    return (
+      <img
+        src={(orig ?? house)!}
+        alt={profile.originalName ?? perfume.cloneName}
+        loading="lazy"
+        className="h-32 w-24 shrink-0 self-start object-contain drop-shadow-[0_8px_18px_rgba(0,0,0,0.4)]"
+      />
+    );
+  }
+
+  const big = shown === "house" ? house! : orig!;
+  const thumbs: [BottleMode, string, string][] = [
+    ["house", house!, perfume.house || "Owned"],
+    ["original", orig!, "Original"],
+  ];
+  return (
+    <div className="shrink-0">
+      <img
+        src={big}
+        alt={shown === "house" ? `${perfume.house} bottle` : profile.originalName ?? perfume.cloneName}
+        loading="lazy"
+        className="h-32 w-24 object-contain drop-shadow-[0_8px_18px_rgba(0,0,0,0.4)]"
+      />
+      <div className="mt-2.5 flex gap-1.5">
+        {thumbs.map(([v, src, label]) => (
+          <button
+            key={v}
+            type="button"
+            onClick={() => setShown(v)}
+            aria-pressed={shown === v}
+            title={label}
+            className={`h-12 w-10 overflow-hidden rounded-md border bg-[rgba(15,12,9,0.25)] transition-[opacity,border-color] ${
+              shown === v ? "border-ink opacity-100" : "border-line opacity-60 hover:opacity-100"
+            }`}
+          >
+            <img src={src} alt="" className="h-full w-full object-contain p-0.5" />
+          </button>
+        ))}
+      </div>
+      <p className="mt-1.5 max-w-[6rem] text-[0.7rem] leading-tight text-ink-3">
+        {shown === "house"
+          ? `${perfume.house} bottle`
+          : perfume.impressionOf
+            ? `Inspired by ${perfume.impressionOf}`
+            : "Original"}
+      </p>
+    </div>
+  );
+}
 
 function NotePyramid({ perfume }: { perfume: Perfume }) {
   const { topNotes, heartNotes, baseNotes } = perfume.profile;
@@ -124,14 +189,7 @@ export function PerfumeDetail({
               background: "linear-gradient(150deg, color-mix(in oklab, var(--fam) 26%, var(--color-surface)), color-mix(in oklab, var(--fam) 8%, var(--color-surface)))",
             }}
           >
-            {profile.imageUrl && (
-              <img
-                src={profile.imageUrl}
-                alt={profile.originalName ?? perfume.cloneName}
-                loading="lazy"
-                className="h-32 w-24 shrink-0 self-start object-contain drop-shadow-[0_8px_18px_rgba(0,0,0,0.4)]"
-              />
-            )}
+            <HeroBottles perfume={perfume} />
             <div className="min-w-0">
               <h2 className="text-[1.9rem] leading-[1.05] text-ink">{perfume.cloneName}</h2>
               {perfume.impressionOf && (
@@ -150,13 +208,26 @@ export function PerfumeDetail({
             {profile.rating != null && (
               <span className="rounded-full border border-line px-3 py-1.5 text-sm text-ink-2">★ {profile.rating}</span>
             )}
-            {profile.originalUrl && (
-              <a href={profile.originalUrl} target="_blank" rel="noopener noreferrer" className="rounded-full border border-line px-3 py-1.5 text-sm text-ink-2 transition-colors hover:border-ink-3 hover:text-ink">
-                Fragrantica ↗
-              </a>
-            )}
-            {!verified && (
-              <span className="rounded-full border border-line px-3 py-1.5 text-xs text-ink-3" title="Estimated — this scent isn't on Fragrantica">◌ estimated</span>
+            {/* hybrid: link both parents; otherwise the single Fragrantica link */}
+            {profile.parentLinks?.length ? (
+              profile.parentLinks.map((p) =>
+                p.url ? (
+                  <a key={p.name} href={p.url} target="_blank" rel="noopener noreferrer" className="rounded-full border border-line px-3 py-1.5 text-sm text-ink-2 transition-colors hover:border-ink-3 hover:text-ink">
+                    {p.name} ↗
+                  </a>
+                ) : null
+              )
+            ) : (
+              <>
+                {profile.originalUrl && (
+                  <a href={profile.originalUrl} target="_blank" rel="noopener noreferrer" className="rounded-full border border-line px-3 py-1.5 text-sm text-ink-2 transition-colors hover:border-ink-3 hover:text-ink">
+                    Fragrantica ↗
+                  </a>
+                )}
+                {!verified && (
+                  <span className="rounded-full border border-line px-3 py-1.5 text-xs text-ink-3" title="Estimated. This scent isn't on Fragrantica">◌ estimated</span>
+                )}
+              </>
             )}
           </div>
 

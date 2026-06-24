@@ -16,6 +16,8 @@ export interface Group {
   items: Perfume[];
   /** family name to color the header, when grouping by family */
   family?: string;
+  /** the house, when every item in the group shares one (for the house logo) */
+  house?: string;
 }
 
 const SEASON_SORT: Season[] = ["spring", "summer", "fall", "winter"];
@@ -50,10 +52,16 @@ export function groupPerfumes(items: Perfume[], by: GroupBy, facets: Facets): Gr
   // any keys not in the canonical order (safety) appended alphabetically
   for (const k of [...map.keys()].sort()) if (!order.includes(k)) order.push(k);
 
-  return order.map((key) => ({
-    key,
-    label: by === "season" ? SEASON_LABEL[key] ?? key : key,
-    items: map.get(key) ?? [],
-    family: by === "family" ? key : undefined,
-  }));
+  return order.map((key) => {
+    const items = map.get(key) ?? [];
+    const houses = new Set(items.map((p) => p.house));
+    return {
+      key,
+      label: by === "season" ? SEASON_LABEL[key] ?? key : key,
+      items,
+      family: by === "family" ? key : undefined,
+      // a single-house group (e.g. any collection group, or house grouping) → show its logo
+      house: houses.size === 1 ? items[0]?.house : undefined,
+    };
+  });
 }

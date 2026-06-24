@@ -37,14 +37,8 @@ export function SiteFooter() {
     <footer className="mt-16 border-t border-line">
       <div className="mx-auto max-w-shell px-4 py-10 sm:px-6">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-          <div>
-            <p className="font-display text-lg text-ink">The Vault</p>
-            <p className="mt-1 max-w-md text-sm text-ink-3">
-              A personal fragrance archive. Data enriched from public fragrance notes; some
-              entries marked “unverified” are auto-derived and worth a personal check.
-            </p>
-          </div>
-          <p className="label">View-only share · built with care</p>
+          <p className="font-display text-lg text-ink">The Vault</p>
+          <p className="label">View-only share</p>
         </div>
       </div>
     </footer>

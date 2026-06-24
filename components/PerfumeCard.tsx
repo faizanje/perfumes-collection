@@ -1,9 +1,14 @@
 "use client";
 
+import { useState } from "react";
+import { ArrowLeftRight } from "lucide-react";
 import type { Perfume } from "@/lib/types";
 import { familyMeta } from "@/lib/families";
+import { useBottlePref, type BottleMode } from "@/lib/bottlePref";
 import { SeasonGlyphs } from "./viz";
 import { FavoriteButton } from "./FavoriteButton";
+
+const other = (m: BottleMode): BottleMode => (m === "house" ? "original" : "house");
 
 export function PerfumeCard({
   perfume,
@@ -14,12 +19,25 @@ export function PerfumeCard({
 }) {
   const { profile } = perfume;
   const fam = familyMeta(profile.family);
-  const img = profile.imageUrl;
+  const origImg = profile.imageUrl;
+  const houseImg = profile.houseBottle?.img;
   const parents = profile.parentImages ?? [];
+  const hasBoth = Boolean(origImg && houseImg);
+
+  // Global default + per-card overrides: hover previews the other bottle (desktop),
+  // tapping the source pill makes a choice stick (works on touch, where there's no hover).
+  const { mode } = useBottlePref();
+  const [stuck, setStuck] = useState<BottleMode | null>(null);
+  const [hover, setHover] = useState(false);
+  const base = stuck ?? mode;
+  const shown: BottleMode = hover && hasBoth ? other(base) : base;
+  const houseLabel = perfume.house || "Owned";
 
   return (
     <article
       data-family={profile.family}
+      onMouseEnter={() => hasBoth && setHover(true)}
+      onMouseLeave={() => hasBoth && setHover(false)}
       className="group relative isolate flex flex-col overflow-hidden rounded-2xl border transition-[transform,box-shadow] duration-[var(--dur-mid)] ease-out hover:-translate-y-1"
       style={{
         borderColor: "color-mix(in oklab, var(--fam) 24%, var(--color-line))",
@@ -38,9 +56,27 @@ export function PerfumeCard({
           className="relative flex h-52 items-center justify-center overflow-hidden"
           style={{ background: "radial-gradient(125% 90% at 50% 12%, color-mix(in oklab, var(--fam) 30%, var(--color-surface)), var(--color-surface) 72%)" }}
         >
-          {img ? (
+          {hasBoth ? (
+            // two bottles cross-fade: the inspired-by original and the real house bottle
+            <>
+              <img
+                src={origImg!}
+                alt={`${perfume.cloneName}, inspired by ${perfume.impressionOf ?? "original"}`}
+                loading="lazy"
+                aria-hidden={shown !== "original"}
+                className={`absolute inset-0 h-full w-full object-contain p-4 drop-shadow-[0_10px_22px_rgba(0,0,0,0.45)] transition-[opacity,transform] duration-[var(--dur-mid)] ease-out group-hover:scale-[1.05] ${shown === "original" ? "opacity-100" : "opacity-0"}`}
+              />
+              <img
+                src={houseImg!}
+                alt={`${perfume.cloneName}, ${houseLabel} bottle`}
+                loading="lazy"
+                aria-hidden={shown !== "house"}
+                className={`absolute inset-0 h-full w-full object-contain p-4 drop-shadow-[0_10px_22px_rgba(0,0,0,0.45)] transition-[opacity,transform] duration-[var(--dur-mid)] ease-out group-hover:scale-[1.05] ${shown === "house" ? "opacity-100" : "opacity-0"}`}
+              />
+            </>
+          ) : origImg || houseImg ? (
             <img
-              src={img}
+              src={(origImg || houseImg)!}
               alt={profile.originalName ?? perfume.cloneName}
               loading="lazy"
               className="h-full w-full object-contain p-4 drop-shadow-[0_10px_22px_rgba(0,0,0,0.45)] transition-transform duration-[var(--dur-mid)] ease-out group-hover:scale-[1.05]"
@@ -84,16 +120,31 @@ export function PerfumeCard({
           <div className="mt-auto flex items-center justify-between gap-2 pt-3">
             <span className="truncate text-[0.66rem] uppercase tracking-[0.1em] text-ink-3" title={perfume.house}>{perfume.house}</span>
             {profile.source !== "fragrantica" && (
-              <span className="shrink-0 text-[0.62rem] text-ink-3" title="Estimated — not on Fragrantica">◌</span>
+              <span className="shrink-0 text-[0.62rem] text-ink-3" title="Estimated. Not on Fragrantica">◌</span>
             )}
           </div>
         </div>
       </button>
 
-      <div className="absolute right-3 top-3">
-        <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[rgba(15,12,9,0.5)] backdrop-blur-sm">
+      {/* controls overlaid on the image panel — siblings of the open-button to
+          avoid nesting interactive elements inside it. The overlay matches the
+          h-52 image so the toggle lands at the image's bottom-right. */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-52">
+        <span className="pointer-events-auto absolute right-3 top-3 flex h-7 w-7 items-center justify-center rounded-full bg-[rgba(15,12,9,0.5)] backdrop-blur-sm">
           <FavoriteButton id={perfume.id} />
         </span>
+        {hasBoth && (
+          <button
+            type="button"
+            onClick={() => setStuck(other(shown))}
+            aria-label={shown === "house" ? `Showing ${houseLabel} bottle, switch to the inspired-by original` : `Showing the inspired-by original, switch to the ${houseLabel} bottle`}
+            title={shown === "house" ? "Switch to the inspired-by original" : `Switch to the ${houseLabel} bottle`}
+            className="pointer-events-auto absolute bottom-3 right-3 inline-flex items-center gap-1.5 rounded-full bg-[rgba(15,12,9,0.62)] px-2.5 py-1 text-[0.62rem] font-semibold uppercase tracking-wide text-white backdrop-blur-sm transition-colors hover:bg-[rgba(15,12,9,0.82)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)]"
+          >
+            <ArrowLeftRight size={11} strokeWidth={2.2} aria-hidden />
+            {shown === "house" ? houseLabel : "Original"}
+          </button>
+        )}
       </div>
     </article>
   );

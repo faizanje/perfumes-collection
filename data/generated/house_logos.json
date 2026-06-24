@@ -1,0 +1,34 @@
+{
+  "Arome": {
+    "dark": "/img/houses/arome.png",
+    "light": "/img/houses/arome-light.png"
+  },
+  "Scent It": {
+    "dark": "/img/houses/scent-it.png",
+    "light": "/img/houses/scent-it-light.png"
+  },
+  "Twisty Scents": {
+    "dark": "/img/houses/twisty-scents.png",
+    "light": "/img/houses/twisty-scents-light.png"
+  },
+  "Sesky": {
+    "dark": "/img/houses/sesky.png",
+    "light": "/img/houses/sesky-light.png"
+  },
+  "Enchante": {
+    "dark": "/img/houses/enchante.png",
+    "light": "/img/houses/enchante-light.png"
+  },
+  "Nioi Sentirbon": {
+    "dark": "/img/houses/nioi-sentirbon.png",
+    "light": "/img/houses/nioi-sentirbon-light.png"
+  },
+  "Pristine Aromas": {
+    "dark": "/img/houses/pristine-aromas.png",
+    "light": "/img/houses/pristine-aromas-light.png"
+  },
+  "Scent N Stories": {
+    "dark": "/img/houses/scent-n-stories.png",
+    "light": "/img/houses/scent-n-stories-light.png"
+  }
+}

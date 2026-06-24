@@ -1,6 +1,7 @@
 "use client";
 
 import { familyMeta, SEASON_LABEL } from "@/lib/families";
+import { houseLogo } from "@/lib/houseLogos";
 import type { FilterState } from "@/lib/filter";
 import type { Facets, Season } from "@/lib/types";
 
@@ -114,7 +115,15 @@ export function Filters({
                     active ? "bg-ink text-canvas" : "text-ink-2 hover:bg-surface-2"
                   }`}
                 >
-                  <span className="truncate">{h}</span>
+                  <span className="flex min-w-0 items-center gap-1.5">
+                    {houseLogo(h) && (
+                      <>
+                        <img src={houseLogo(h)!.dark} alt="" className="hidden h-4 w-auto max-w-[64px] shrink-0 object-contain dark:block" />
+                        <img src={houseLogo(h)!.light} alt="" className="block h-4 w-auto max-w-[64px] shrink-0 object-contain dark:hidden" />
+                      </>
+                    )}
+                    <span className="truncate">{h}</span>
+                  </span>
                   <span className="tnum text-xs opacity-70">{n}</span>
                 </button>
               );

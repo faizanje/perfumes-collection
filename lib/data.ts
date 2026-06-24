@@ -7,10 +7,21 @@
 
 import collectionData from "@/data/generated/collection.json";
 import facetsData from "@/data/generated/facets.json";
-import type { Facets, Perfume } from "./types";
+import aromeImages from "@/data/generated/arome_images.json";
+import type { Facets, HouseBottle, Perfume } from "./types";
 
-const COLLECTION = collectionData as unknown as Perfume[];
 const FACETS = facetsData as unknown as Facets;
+
+// Real house bottle photos (arome.pk), keyed by perfume id. Merged onto the
+// profile here so the rest of the app sees a single `profile.houseBottle` field
+// and nothing else imports the JSON. See scripts/arome_images.py.
+const HOUSE_BOTTLES = aromeImages as Record<string, HouseBottle & { confidence?: string }>;
+
+const COLLECTION = (collectionData as unknown as Perfume[]).map((p) => {
+  const hb = HOUSE_BOTTLES[p.id];
+  if (!hb) return p;
+  return { ...p, profile: { ...p.profile, houseBottle: { img: hb.img, title: hb.title, handle: hb.handle } } };
+});
 
 export function getCollection(): Perfume[] {
   return COLLECTION;

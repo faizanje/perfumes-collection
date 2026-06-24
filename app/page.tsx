@@ -21,8 +21,8 @@ export default function HomePage() {
               The&nbsp;Vault
             </h1>
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-ink-2">
-              Every bottle in the collection — its notes, its family, the seasons and
-              occasions it suits, and what it layers with. Search it, filter it, and decide
+              Every bottle in the collection: its notes, its family, the seasons and
+              occasions it suits, and what it layers with. Search, filter, and decide
               what to wear.
             </p>
             <div className="mt-7 flex flex-wrap items-center gap-3">

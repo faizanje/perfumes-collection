@@ -6,6 +6,14 @@ export interface SeasonStrength {
   strength: number;
 }
 
+/** The real bottle photo from the decant house (e.g. arome.pk), shown alongside
+ *  the inspired-by original. Resolved in lib/data.ts from arome_images.json. */
+export interface HouseBottle {
+  img: string;
+  title: string;
+  handle: string;
+}
+
 export interface Profile {
   family: string;
   keyAccords: string[];
@@ -29,11 +37,15 @@ export interface Profile {
   isBlend?: boolean;
   parents?: string[];
   parentImages?: string[] | null;
+  parentLinks?: { name: string; url: string | null }[] | null;
   isHouseOriginal?: boolean;
   accordWeights?: Record<string, number> | null;
   imageUrl?: string | null;
   originalUrl?: string | null;
   source?: string | null;
+  /** Real house bottle photo (the decant the owner actually has). When present,
+   *  the card/detail can show it next to the inspired-by original (imageUrl). */
+  houseBottle?: HouseBottle | null;
 }
 
 export interface Perfume {

@@ -76,6 +76,12 @@ URL_OVERRIDES = {
     "shuhral-elixir": "https://www.fragrantica.com/perfume/Rasasi/Shuhrah-Elixir-112548.html",
     "monocline-05": "https://www.fragrantica.com/perfume/Maison-Alhambra/Monocline-05-96835.html",
     "splendor": "https://www.fragrantica.com/perfume/Seris-Parfums/Splendor-Black-127081.html",
+    "brazilian-tobacco": "https://www.fragrantica.com/perfume/Ibraheem-AlQurashi/Brazilian-Tobacco-100562.html",
+    "maison-margiela-replica-french-riviera": "https://www.fragrantica.com/perfume/Mancera/French-Riviera-74636.html",
+    "arome-king-opus-original": "https://www.fragrantica.com/perfume/Amouage/Opus-XV-King-Blue-83394.html",
+    "roja-elysium-pour-homme": "https://www.fragrantica.com/perfume/Roja-Dove/Elysium-Pour-Homme-Parfum-Cologne-46296.html",
+    "blue": "https://www.fragrantica.com/perfume/Ahmed-Al-Maghribi/Blue-by-Ahmed-104882.html",
+    "ocean-rush": "https://www.fragrantica.com/perfume/Rayhaan/Ocean-Rush-107857.html",
 }
 
 

@@ -77,7 +77,7 @@ export function WearClient({
           </p>
         ) : matches.length === 0 ? (
           <p className="py-16 text-center font-display text-xl text-ink-3">
-            No strong match for that combination — try relaxing one choice.
+            No strong match for that combination. Try relaxing one choice.
           </p>
         ) : (
           <>
